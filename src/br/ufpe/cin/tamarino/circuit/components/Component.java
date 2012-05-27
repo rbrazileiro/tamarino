@@ -1,4 +1,4 @@
-package br.cin.ufpe.tamarino.core.components;
+package br.ufpe.cin.tamarino.circuit.components;
 
 import java.util.HashMap;
 import java.util.LinkedList;

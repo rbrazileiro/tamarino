@@ -1,13 +1,12 @@
 /**
  * 
  */
-package br.cin.ufpe.tamarino.core.components.input;
+package br.ufpe.cin.tamarino.circuit.components.input;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
-import br.cin.ufpe.tamarino.core.components.Component;
-import br.cin.ufpe.tamarino.core.components.Pin;
+import br.ufpe.cin.tamarino.circuit.components.Component;
+import br.ufpe.cin.tamarino.circuit.components.Pin;
 
 /**
  * @author giovane
