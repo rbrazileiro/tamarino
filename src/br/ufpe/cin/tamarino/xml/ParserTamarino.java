@@ -3,6 +3,7 @@ package br.ufpe.cin.tamarino.xml;
 import java.io.InputStream;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
@@ -46,5 +47,13 @@ public class ParserTamarino {
 	 */
 	public Object toObject(InputStream xmlFile){
 		return this.xstream.fromXML(xmlFile);
+	}
+	
+	/**
+	 * Adds a specified converter
+	 * @param converter The converter to add.
+	 */
+	public void addConverter(Converter converter){
+		this.xstream.registerConverter(converter);
 	}
 }

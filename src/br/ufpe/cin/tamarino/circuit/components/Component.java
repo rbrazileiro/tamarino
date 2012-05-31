@@ -1,20 +1,30 @@
 package br.ufpe.cin.tamarino.circuit.components;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
- * Super classe de componentes suportados pelo sistema
- * @author gbr2
- *
+ * Represents a component of a circuit
+ * @author Giovane Boaviagem Ribeiro
+ * @since 30/05/2012
  */
-public class Component {
-	private String label;
-	private HashMap<String,Pin> pinagem;	
+public abstract class Component {
+	private String label;	
+	private LinkedList<Pin> listPins;
 	
+	public Component(){
+		this.listPins=this.setPins();	
+	}
 	
-	public Component(){}
-
+	/**
+	 * Creates a new instance of <code>Component</code>
+	 * with a specified label.
+	 * @param label Label of the component
+	 */
+	public Component(String label){		
+		this();
+		this.label=label;
+	}
+	
 	/**
 	 * @return the label
 	 */
@@ -30,16 +40,21 @@ public class Component {
 	}
 
 	/**
-	 * @return the pinagem
+	 * @return the listPins
 	 */
-	public HashMap<String,Pin> getPinagem() {
-		return pinagem;
+	public LinkedList<Pin> getListPins() {
+		return listPins;
 	}
 
 	/**
-	 * @param pinagem the pinagem to set
+	 * @param listPins the listPins to set
 	 */
-	public void setPinagem(HashMap<String,Pin> pinagem) {
-		this.pinagem = pinagem;
-	}	
+	public void setListPins(LinkedList<Pin> listPins) {
+		this.listPins = listPins;
+	}
+	
+	/**
+	 * Estabelece a pinagem do componente
+	 */
+	protected abstract LinkedList<Pin> setPins();
 }

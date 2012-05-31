@@ -3,7 +3,7 @@ package br.ufpe.cin.tamarino.circuit;
 import java.util.LinkedList;
 
 import br.ufpe.cin.tamarino.circuit.components.Component;
-import br.ufpe.cin.tamarino.xml.ParserTamarino;
+import br.ufpe.cin.tamarino.circuit.components.Connection;
 
 /**
  * Classe que representa um circuito
@@ -13,7 +13,8 @@ import br.ufpe.cin.tamarino.xml.ParserTamarino;
  */
 public class Circuit {
 	private String name;
-	private LinkedList<Component> componentes;
+	private LinkedList<Component> components;
+	private LinkedList<Connection> connections;
 	
 	/**
 	 * @param name
@@ -22,7 +23,7 @@ public class Circuit {
 	public Circuit(String name, LinkedList<Component> componentes) {
 		super();
 		this.name = name;
-		this.componentes = componentes;		
+		this.components = componentes;		
 	}
 	
 	public Circuit(){}
@@ -45,13 +46,13 @@ public class Circuit {
 	 * @return the componentes
 	 */
 	public LinkedList<Component> getComponentes() {
-		return componentes;
+		return components;
 	}
 
 	/**
 	 * @param componentes the componentes to set
 	 */
 	public void setComponentes(LinkedList<Component> componentes) {
-		this.componentes = componentes;
+		this.components = componentes;
 	}
 }
