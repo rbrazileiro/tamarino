@@ -21,9 +21,14 @@ public class Main {
 		}
 		
 		try {
-			if(file!=null){				
-				Tamarino tam=new Tamarino(new File(file));				
-			}
+//			if(file!=null){				
+//				Tamarino tam=new Tamarino(new File(file));
+//				tam.testFile();
+//			}
+							
+			Tamarino tam=new Tamarino(new File("testeOut.xml"));
+			tam.testFile();
+			
 		} catch (FileNotFoundException e) {			 
 			e.printStackTrace();
 		}

@@ -1,29 +1,41 @@
 package br.ufpe.cin.tamarino.circuit.components;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
+
 
 /**
  * Representa um pino de um componente
  * @author Giovane Boaviagem
  * @since 25/05/2012 
  */
-public class Pin {	
+@XStreamAlias("pin")
+public class Pin {
+	@XStreamAsAttribute //setando como os atributos da tag "pin"
 	private String label;
-	private float value;
+	@XStreamAsAttribute
+	private String labelComponent;	
 	
 	private static int count=0;
 	
 	/**
-	 * Creates a new instance of <code>Pin</code> without
+	 * Creates a new instance of <code>Pin</code> without a specific label.
 	 * @param idComponent
 	 */
-	public Pin(){
-		this.value=0;
+	public Pin(String labelComponent){		
+		this.labelComponent=labelComponent;	
 		this.label="p"+count;
-		count++;
+		count++;	
 	}
 	
-	public Pin(String label){
-		this.value=0;
+	/**
+	 * 
+	 * @param labelComponent
+	 * @param label
+	 */
+	public Pin(String labelComponent, String label){		
+		this.labelComponent=labelComponent;
 		this.label=label;
 	}
 
@@ -42,16 +54,16 @@ public class Pin {
 	}
 
 	/**
-	 * @return the value
+	 * @return the labelComponent
 	 */
-	public float getValue() {
-		return value;
+	public String getLabelComponent() {
+		return labelComponent;
 	}
 
 	/**
-	 * @param value the value to set
+	 * @param labelComponent the labelComponent to set
 	 */
-	public void setValue(float value) {
-		this.value = value;	
-	}	
+	public void setLabelComponent(String labelComponent) {
+		this.labelComponent = labelComponent;
+	}
 }

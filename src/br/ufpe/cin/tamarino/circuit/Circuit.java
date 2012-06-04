@@ -5,16 +5,24 @@ import java.util.LinkedList;
 import br.ufpe.cin.tamarino.circuit.components.Component;
 import br.ufpe.cin.tamarino.circuit.components.Connection;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 /**
  * Classe que representa um circuito
  * @author Giovane Boaviagem
  * @since 26/05/2012
  *
  */
+@XStreamAlias("circuit")
 public class Circuit {
+	@XStreamAlias("name")
 	private String name;
+	@XStreamAlias("components")
+	//@XStreamConverter(value=ComponentConverter.class)
 	private LinkedList<Component> components;
+	@XStreamAlias("connections")
 	private LinkedList<Connection> connections;
+	
 	
 	/**
 	 * @param name
@@ -43,16 +51,30 @@ public class Circuit {
 	}
 
 	/**
-	 * @return the componentes
+	 * @return the components
 	 */
-	public LinkedList<Component> getComponentes() {
+	public LinkedList<Component> getComponents() {
 		return components;
 	}
 
 	/**
-	 * @param componentes the componentes to set
+	 * @param components the components to set
 	 */
-	public void setComponentes(LinkedList<Component> componentes) {
-		this.components = componentes;
+	public void setComponents(LinkedList<Component> components) {
+		this.components = components;
 	}
+
+	/**
+	 * @return the connections
+	 */
+	public LinkedList<Connection> getConnections() {
+		return connections;
+	}
+
+	/**
+	 * @param connections the connections to set
+	 */
+	public void setConnections(LinkedList<Connection> connections) {
+		this.connections = connections;
+	}	
 }

@@ -1,6 +1,4 @@
-package br.ufpe.cin.tamarino.circuit.xml;
-
-import br.ufpe.cin.tamarino.circuit.Circuit;
+package br.ufpe.cin.tamarino.xml;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -8,34 +6,24 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-/**
- * Converter for the Circuit class
- * @author Giovane Boaviagem
- * @since 30/05/2012
- *
- */
-public class CircuitConverter implements Converter {
+public class ComponentConverter implements Converter {
 
 	@Override
 	public boolean canConvert(Class arg0) {
-		if(arg0.equals(Circuit.class)){
-			return true;
-		}else{
-			return false;
-		}		
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public void marshal(Object arg0, HierarchicalStreamWriter arg1,
 			MarshallingContext arg2) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public Object unmarshal(HierarchicalStreamReader arg0,
-			UnmarshallingContext arg1) {
-		// TODO Auto-generated method stub
+			UnmarshallingContext arg1) {		
 		return null;
 	}
 

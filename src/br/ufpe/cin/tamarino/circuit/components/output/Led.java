@@ -2,6 +2,7 @@ package br.ufpe.cin.tamarino.circuit.components.output;
 
 import java.util.LinkedList;
 
+import br.ufpe.cin.tamarino.circuit.ComponentType;
 import br.ufpe.cin.tamarino.circuit.components.Component;
 import br.ufpe.cin.tamarino.circuit.components.Pin;
 
@@ -35,4 +36,8 @@ public class Led extends Component{
 		return listPins;
 	}
 
+	@Override
+	public ComponentType getType() {
+		return ComponentType.LED;
+	}
 }

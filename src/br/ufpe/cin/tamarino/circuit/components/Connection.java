@@ -1,76 +1,63 @@
 package br.ufpe.cin.tamarino.circuit.components;
 
+import br.ufpe.cin.tamarino.xml.ConnectionConverter;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+
 /**
  * Represents a connection between 2 pins
  * @author Giovane Boaviagem
  * @since 30/05/2012
  *
  */
+@XStreamAlias("connection")
 public class Connection {
-	private int idComponentFrom;
-	private int idPinFrom;	
-	private int labelComponentTo;
-	private int idPinTo;
+	@XStreamAlias("to")	
+	@XStreamConverter(value=ConnectionConverter.class)
+	private Pin to;
+	@XStreamAlias("from")	
+	@XStreamConverter(value=ConnectionConverter.class)
+	private Pin from;
+	
+	public Connection(){}
+	
 	/**
-	 * @param idComponentFrom
-	 * @param idPinFrom
-	 * @param labelComponentTo
-	 * @param idPinTo
+	 * @param to
+	 * @param from
 	 */
-	public Connection(int idComponentFrom, int idPinFrom, int labelComponentTo,
-			int idPinTo) {
+	public Connection(Pin to, Pin from) {
 		super();
-		this.idComponentFrom = idComponentFrom;
-		this.idPinFrom = idPinFrom;
-		this.labelComponentTo = labelComponentTo;
-		this.idPinTo = idPinTo;
+		this.to = to;
+		this.from = from;
 	}
+	
+	
 	/**
-	 * @return the idComponentFrom
+	 * @return the to
 	 */
-	public int getIdComponentFrom() {
-		return idComponentFrom;
+	public Pin getTo() {
+		return to;
 	}
+
 	/**
-	 * @param idComponentFrom the idComponentFrom to set
+	 * @param to the to to set
 	 */
-	public void setIdComponentFrom(int idComponentFrom) {
-		this.idComponentFrom = idComponentFrom;
+	public void setTo(Pin to) {
+		this.to = to;
 	}
+
 	/**
-	 * @return the idPinFrom
+	 * @return the from
 	 */
-	public int getIdPinFrom() {
-		return idPinFrom;
+	public Pin getFrom() {
+		return from;
 	}
+
 	/**
-	 * @param idPinFrom the idPinFrom to set
+	 * @param from the from to set
 	 */
-	public void setIdPinFrom(int idPinFrom) {
-		this.idPinFrom = idPinFrom;
-	}
-	/**
-	 * @return the labelComponentTo
-	 */
-	public int getLabelComponentTo() {
-		return labelComponentTo;
-	}
-	/**
-	 * @param labelComponentTo the labelComponentTo to set
-	 */
-	public void setLabelComponentTo(int labelComponentTo) {
-		this.labelComponentTo = labelComponentTo;
-	}
-	/**
-	 * @return the idPinTo
-	 */
-	public int getIdPinTo() {
-		return idPinTo;
-	}
-	/**
-	 * @param idPinTo the idPinTo to set
-	 */
-	public void setIdPinTo(int idPinTo) {
-		this.idPinTo = idPinTo;
+	public void setFrom(Pin from) {
+		this.from = from;
 	}	
 }

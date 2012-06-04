@@ -1,9 +1,15 @@
 package br.ufpe.cin.tamarino.xml;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 
+import br.ufpe.cin.tamarino.circuit.Circuit;
+import br.ufpe.cin.tamarino.circuit.components.Component;
+import br.ufpe.cin.tamarino.circuit.components.output.Led;
+
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
@@ -17,6 +23,16 @@ public class ParserTamarino {
 	
 	private ParserTamarino(){
 		this.xstream=new XStream(new DomDriver());
+		this.xstream.autodetectAnnotations(true); //detecta as anotacoes automaticamente
+		this.initAliases();
+	}
+	
+	/**
+	 * 
+	 */
+	private void initAliases(){
+		this.xstream.alias("circuit", Circuit.class);
+		this.xstream.alias("component", Led.class);
 	}
 	
 	/**
@@ -32,15 +48,6 @@ public class ParserTamarino {
 	}
 	
 	/**
-	 * Adiciona um alias ao driver xstream
-	 * @param aliasName nome do alias
-	 * @param clazz Nome da classe que eh representada pelo alias
-	 */
-	public void addAlias(String aliasName,Class<?> clazz){
-		this.xstream.alias(aliasName, clazz);
-	}
-	
-	/**
 	 * Converte um arquivo xml para um objeto qualquer
 	 * @param xmlFile Arquivo a ser convertido
 	 * @return Objeto resultante da conversao xml.
@@ -50,10 +57,22 @@ public class ParserTamarino {
 	}
 	
 	/**
-	 * Adds a specified converter
-	 * @param converter The converter to add.
+	 * Converts a object in a String XML.
+	 * @param arg0 Object to be converted
+	 * @return A object's xml string
 	 */
-	public void addConverter(Converter converter){
-		this.xstream.registerConverter(converter);
+	public String toStringXML(Object arg0){
+		return this.xstream.toXML(arg0);
+	}
+	
+	/**
+	 * 
+	 * @param arg0
+	 * @param pathFile
+	 * @throws IOException
+	 */
+	public void toXMLFile(Object arg0,String pathFile) throws IOException {
+		FileWriter fw=new FileWriter(new File(pathFile));
+		this.xstream.toXML(arg0, fw);
 	}
 }

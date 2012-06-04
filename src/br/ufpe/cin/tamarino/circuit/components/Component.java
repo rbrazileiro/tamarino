@@ -2,14 +2,20 @@ package br.ufpe.cin.tamarino.circuit.components;
 
 import java.util.LinkedList;
 
+import br.ufpe.cin.tamarino.circuit.ComponentType;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 /**
  * Represents a component of a circuit
  * @author Giovane Boaviagem Ribeiro
  * @since 30/05/2012
  */
 public abstract class Component {
+	@XStreamAsAttribute
 	private String label;	
-	private LinkedList<Pin> listPins;
+	private LinkedList<Pin> listPins;	
 	
 	public Component(){
 		this.listPins=this.setPins();	
@@ -57,4 +63,10 @@ public abstract class Component {
 	 * Estabelece a pinagem do componente
 	 */
 	protected abstract LinkedList<Pin> setPins();
+	
+	/**
+	 * 
+	 * @return The type of the component
+	 */
+	public abstract ComponentType getType();	
 }
