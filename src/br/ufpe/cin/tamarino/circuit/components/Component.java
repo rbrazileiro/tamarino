@@ -1,24 +1,30 @@
 package br.ufpe.cin.tamarino.circuit.components;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 
 import br.ufpe.cin.tamarino.circuit.ComponentType;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
  * Represents a component of a circuit
  * @author Giovane Boaviagem Ribeiro
  * @since 30/05/2012
+ * TODO Montar estrutura do arquivo de configurações que carregará:
+ * - Pinagem
+ * - estado do componente
+ * - Outros atributos específicos de cada componente.
  */
 public abstract class Component {
 	@XStreamAsAttribute
-	private String label;	
-	private LinkedList<Pin> listPins;	
+	private String label;
+	private ComponentType type;
+	private HashMap<ComponentProperty,Object> properties;
 	
 	public Component(){
-		this.listPins=this.setPins();	
+		this.label="";
+		this.properties=this.initProperties();
+		this.type=null;
 	}
 	
 	/**
@@ -26,9 +32,10 @@ public abstract class Component {
 	 * with a specified label.
 	 * @param label Label of the component
 	 */
-	public Component(String label){		
-		this();
+	public Component(String label){	
 		this.label=label;
+		this.properties=new HashMap<ComponentProperty, Object>();
+		this.type=null;
 	}
 	
 	/**
@@ -46,27 +53,29 @@ public abstract class Component {
 	}
 
 	/**
-	 * @return the listPins
+	 * @return the type
 	 */
-	public LinkedList<Pin> getListPins() {
-		return listPins;
+	public ComponentType getType() {
+		return type;
 	}
 
 	/**
-	 * @param listPins the listPins to set
+	 * @param type the type to set
 	 */
-	public void setListPins(LinkedList<Pin> listPins) {
-		this.listPins = listPins;
+	public void setType(ComponentType type) {
+		this.type = type;
 	}
-	
+
 	/**
-	 * Estabelece a pinagem do componente
+	 * @return the properties
 	 */
-	protected abstract LinkedList<Pin> setPins();
-	
+	public HashMap<ComponentProperty, Object> getProperties() {
+		return properties;
+	}
+
 	/**
 	 * 
-	 * @return The type of the component
+	 * @return
 	 */
-	public abstract ComponentType getType();	
+	public abstract HashMap<ComponentProperty,Object> initProperties();
 }

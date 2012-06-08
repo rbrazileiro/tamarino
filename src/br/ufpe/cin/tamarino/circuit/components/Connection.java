@@ -26,8 +26,7 @@ public class Connection {
 	 * @param to
 	 * @param from
 	 */
-	public Connection(Pin to, Pin from) {
-		super();
+	public Connection(Pin to, Pin from) {		
 		this.to = to;
 		this.from = from;
 	}

@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import br.ufpe.cin.tamarino.circuit.Circuit;
-import br.ufpe.cin.tamarino.circuit.components.Component;
-import br.ufpe.cin.tamarino.circuit.components.output.Led;
+import br.ufpe.cin.tamarino.xml.arduino.Arduino;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -23,16 +22,15 @@ public class ParserTamarino {
 	
 	private ParserTamarino(){
 		this.xstream=new XStream(new DomDriver());
-		this.xstream.autodetectAnnotations(true); //detecta as anotacoes automaticamente
-		this.initAliases();
+		this.xstream.autodetectAnnotations(true); //detecta as anotacoes automaticamente		
+		this.initAliases();		
 	}
 	
 	/**
 	 * 
 	 */
 	private void initAliases(){
-		this.xstream.alias("circuit", Circuit.class);
-		this.xstream.alias("component", Led.class);
+		this.xstream.alias("arduino", Arduino.class);
 	}
 	
 	/**
@@ -74,5 +72,14 @@ public class ParserTamarino {
 	public void toXMLFile(Object arg0,String pathFile) throws IOException {
 		FileWriter fw=new FileWriter(new File(pathFile));
 		this.xstream.toXML(arg0, fw);
+	}
+	
+	/**
+	 * Adds a new alias to the xstream object
+	 * @param name
+	 * @param type
+	 */
+	public void addAlias(String name,Class<?> type){
+		this.xstream.alias(name, type);
 	}
 }

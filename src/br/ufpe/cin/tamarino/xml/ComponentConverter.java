@@ -1,5 +1,7 @@
 package br.ufpe.cin.tamarino.xml;
 
+import br.ufpe.cin.tamarino.circuit.components.Component;
+
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
@@ -10,20 +12,22 @@ public class ComponentConverter implements Converter {
 
 	@Override
 	public boolean canConvert(Class arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		if(arg0==Component.class){
+			return true;
+		}else{
+			return false;
+		}		
 	}
 
 	@Override
 	public void marshal(Object arg0, HierarchicalStreamWriter arg1,
-			MarshallingContext arg2) {
-		
+			MarshallingContext arg2) {		
 
 	}
 
 	@Override
 	public Object unmarshal(HierarchicalStreamReader arg0,
-			UnmarshallingContext arg1) {		
+			UnmarshallingContext arg1) {
 		return null;
 	}
 

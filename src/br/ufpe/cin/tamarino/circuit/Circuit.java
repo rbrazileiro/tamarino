@@ -2,39 +2,33 @@ package br.ufpe.cin.tamarino.circuit;
 
 import java.util.LinkedList;
 
-import br.ufpe.cin.tamarino.circuit.components.Component;
-import br.ufpe.cin.tamarino.circuit.components.Connection;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * Classe que representa um circuito
+ * Represents a circuit.  
  * @author Giovane Boaviagem
  * @since 26/05/2012
  *
  */
-@XStreamAlias("circuit")
-public class Circuit {
-	@XStreamAlias("name")
+public class Circuit {	
 	private String name;
-	@XStreamAlias("components")
-	//@XStreamConverter(value=ComponentConverter.class)
-	private LinkedList<Component> components;
-	@XStreamAlias("connections")
-	private LinkedList<Connection> connections;
-	
+	private CircuitExport exportTo;
+	private LinkedList<Input> inputs;
+	private LinkedList<Output> outputs;
 	
 	/**
+	 * Creates a new instance of <code>Circuit</code>
 	 * @param name
-	 * @param componentes
+	 * @param exportTo
 	 */
-	public Circuit(String name, LinkedList<Component> componentes) {
+	public Circuit(String name, CircuitExport exportTo,LinkedList<Input> inputs,LinkedList<Output> outputs) {
 		super();
 		this.name = name;
-		this.components = componentes;		
+		this.exportTo = exportTo;
+		this.inputs=inputs;
+		this.outputs=outputs;
 	}
-	
-	public Circuit(){}
+
 
 	/**
 	 * @return the name
@@ -51,30 +45,44 @@ public class Circuit {
 	}
 
 	/**
-	 * @return the components
+	 * @return the exportTo
 	 */
-	public LinkedList<Component> getComponents() {
-		return components;
+	public CircuitExport getExportTo() {
+		return exportTo;
 	}
 
 	/**
-	 * @param components the components to set
+	 * @param exportTo the exportTo to set
 	 */
-	public void setComponents(LinkedList<Component> components) {
-		this.components = components;
+	public void setExportTo(CircuitExport exportTo) {
+		this.exportTo = exportTo;
+	}
+	
+	/**
+	 * @return the inputs
+	 */
+	public LinkedList<Input> getInputs() {
+		return inputs;
 	}
 
 	/**
-	 * @return the connections
+	 * @param inputs the inputs to set
 	 */
-	public LinkedList<Connection> getConnections() {
-		return connections;
+	public void setInputs(LinkedList<Input> inputs) {
+		this.inputs = inputs;
 	}
 
 	/**
-	 * @param connections the connections to set
+	 * @return the outputs
 	 */
-	public void setConnections(LinkedList<Connection> connections) {
-		this.connections = connections;
-	}	
+	public LinkedList<Output> getOutputs() {
+		return outputs;
+	}
+
+	/**
+	 * @param outputs the outputs to set
+	 */
+	public void setOutputs(LinkedList<Output> outputs) {
+		this.outputs = outputs;
+	}		
 }

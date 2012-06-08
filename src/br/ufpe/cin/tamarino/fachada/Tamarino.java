@@ -9,8 +9,8 @@ import br.ufpe.cin.tamarino.circuit.Circuit;
 import br.ufpe.cin.tamarino.circuit.components.Component;
 import br.ufpe.cin.tamarino.circuit.components.Connection;
 import br.ufpe.cin.tamarino.circuit.components.Pin;
-import br.ufpe.cin.tamarino.circuit.components.output.Led;
 import br.ufpe.cin.tamarino.xml.ParserTamarino;
+import br.ufpe.cin.tamarino.xml.arduino.Arduino;
 
 /**
  * Fachada do sistema.
@@ -37,34 +37,17 @@ public class Tamarino {
 	}
 	
 	/**
-	 * 
+	 * Executes the system
 	 */
-	public void testFile(){
-		System.out.println("==== Testando o arquivo ====");
-		System.out.println("* Lista de componentes:");
-		for(Iterator<Component> it=this.circ.getComponents().iterator();it.hasNext();){
-			Component comp=it.next();
-			Led l=(Led) comp;
-			System.out.println("** Nome: "+comp.getLabel());
-			System.out.println("** Pinagem: ");
-			System.out.println("** Tipo: "+l.getType());
-			for(Iterator<Pin> it2=comp.getListPins().iterator();it2.hasNext();){
-				Pin p=it2.next();
-				System.out.println("*** Label: "+p.getLabel());
-				System.out.println("*** Label do componente: "+p.getLabelComponent());				
-			}			
-		}
-		System.out.println();
-		
-		System.out.println("* Lista de conexões:");
-		for(Iterator<Connection> it3=this.circ.getConnections().iterator();it3.hasNext();){
-			Connection conn=it3.next();
-			System.out.println("** Pino de origem: ");
-			System.out.println("*** label: "+conn.getFrom().getLabel());
-			System.out.println("*** label do componente: "+conn.getFrom().getLabelComponent());
-			System.out.println("** Pino de destino: ");
-			System.out.println("*** label: "+conn.getTo().getLabel());
-			System.out.println("*** label do componente: "+conn.getTo().getLabelComponent());
+	public void exec(){
+		if(this.circ instanceof Arduino){
+			Arduino ard=(Arduino) this.circ;
+			
+			System.out.println("Nome: "+ard.getName());
+			System.out.println("Exportar para: "+ard.getExportTo());
+			System.out.println("Tipo da placa: "+ard.getType());
 		}
 	}
+	
+	
 }

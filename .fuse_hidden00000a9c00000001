@@ -1,0 +1,17 @@
+<circuit>
+  <name>TesteLED</name>
+  <components>
+    <br.ufpe.cin.tamarino.circuit.components.output.Led label="led0">
+      <listPins>
+        <pin label="p0" labelComponent="p0"/>
+        <pin label="p1" labelComponent="p1"/>
+      </listPins>
+    </br.ufpe.cin.tamarino.circuit.components.output.Led>
+  </components>
+  <connections>
+    <connection>
+      <to labelPin="p0" labelComponent="led0"/>
+      <from labelPin="p1" labelComponent="led0"/>
+    </connection>
+  </connections>
+</circuit>

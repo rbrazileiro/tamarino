@@ -5,31 +5,30 @@ import java.io.FileNotFoundException;
 
 import br.ufpe.cin.tamarino.fachada.Tamarino;
 
+/**
+ * Main class of the system
+ * @author Giovane Boaviagem
+ * @since 08/06/2012
+ *
+ */
 public class Main {
+	private static File fileName=new File("testeOut.xml");
 	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args){
-		String file=null;
-//		String option=null;
-		if(args!=null){
-			if(args.length>=1){
-				file=args[0];
+		try {
+			if(args.length>1){
+				fileName=new File(args[0]);
 			}
 			
-//			if(args.length>=2){
-//				option=args[1];
-//			}
-		}
-		
-		try {
-//			if(file!=null){				
-//				Tamarino tam=new Tamarino(new File(file));
-//				tam.testFile();
-//			}
-							
-			Tamarino tam=new Tamarino(new File("testeOut.xml"));
-			tam.testFile();
-			
-		} catch (FileNotFoundException e) {			 
+			if(fileName!=null&&fileName.exists()&&fileName.isFile()){				
+				Tamarino tam=new Tamarino(fileName);
+				tam.exec();			
+			}
+		} catch (FileNotFoundException e) {			
 			e.printStackTrace();
 		}
 	}
