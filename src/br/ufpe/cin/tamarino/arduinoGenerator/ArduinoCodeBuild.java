@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArduinoCodeBuild {
@@ -15,8 +16,10 @@ public class ArduinoCodeBuild {
 	private List<AbstractFunction> setupFluxogram;
 	private List<AbstractFunction> loopFluxogram;
 	
-	public ArduinoCodeBuild(String filePath){
-		this.filePath = filePath;
+	public ArduinoCodeBuild(){
+		this.filePath = System.getProperty("user.dir");
+		setupFluxogram = new ArrayList<AbstractFunction>();
+		loopFluxogram = new ArrayList<AbstractFunction>();
 	}
 	
 	public void addSetupFunction(AbstractFunction function){
@@ -39,20 +42,21 @@ public class ArduinoCodeBuild {
 		boolean result = false;
 		
 		// Montagem do código
-		
+		addCodeHeader();
 		// função SETUP
-		code = "void setup(){\n";
+		code += "void setup(){\n";
 		for (AbstractFunction function : setupFluxogram) {
-			code += function.script;
+			code += "\t"+function.script;
 		} 
 		
 		code += "}\n\n";
 		
 		// função LOOP
 		
+		
 		code += "void loop(){\n";
 		for (AbstractFunction lFunction : loopFluxogram) {
-			code += lFunction.script;
+			code += "\t"+lFunction.script;
 		}
 		
 		code += "}\n";
@@ -65,11 +69,17 @@ public class ArduinoCodeBuild {
 		return result;
 	}
 	
+	private void addCodeHeader() {
+		code ="/* Código gerado para fazer upload no arduino\n";
+		code+="\tEquipe: David Fraga, David Edson, Ricardo, Giovane\n";
+		code+="*/\n\n";
+	}
+
 	private boolean saveCode(){
 		boolean result = false;
 		
 		if (finalFile == null || !finalFile.exists()) {
-			finalFile = new File(filePath+"\\arduinoCode.ino");
+			finalFile = new File(filePath+"/arduinoCode.ino");
 		}
 		
 		try {
