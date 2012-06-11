@@ -1,7 +1,10 @@
 <arduino>
     <name>Teste Arduino</name>
-    <exportTo>ARDUINO</exportTo>
-    <inputs/>
-    <outputs/>
-    <type>UNO</type>        
+    <author>Giovane</author>    
+    <!-- setup>
+        
+    </setup>
+    <loop>
+        
+    </loop-->            
 </arduino>

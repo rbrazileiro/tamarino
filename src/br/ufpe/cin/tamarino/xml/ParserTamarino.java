@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import br.ufpe.cin.tamarino.circuit.Circuit;
-import br.ufpe.cin.tamarino.xml.arduino.Arduino;
+import br.ufpe.cin.tamarino.circuit.arduino.Arduino;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
