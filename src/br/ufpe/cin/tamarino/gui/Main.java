@@ -26,7 +26,7 @@ public class Main {
 			
 			if(fileName!=null&&fileName.exists()&&fileName.isFile()){				
 				Tamarino tam=new Tamarino(fileName);
-				tam.exec();			
+				tam.exec();
 			}
 		} catch (FileNotFoundException e) {			
 			e.printStackTrace();

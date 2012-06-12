@@ -1,5 +1,12 @@
 package br.ufpe.cin.tamarino.circuit.arduino;
 
+import java.util.LinkedList;
+
+import br.ufpe.cin.tamarino.arduinoGenerator.AbstractFunction;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.Delay;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalRead;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalWrite;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.PinMode;
 import br.ufpe.cin.tamarino.circuit.Circuit;
 import br.ufpe.cin.tamarino.xml.ParserTamarino;
 
@@ -13,8 +20,18 @@ import br.ufpe.cin.tamarino.xml.ParserTamarino;
  */
 public class Arduino extends Circuit{	
 	
+	private LinkedList<AbstractFunction> setup;
+	private LinkedList<AbstractFunction> loop;
+	
 	static{
 		ParserTamarino.getInstance().addAlias("arduino", Arduino.class);
+		
+		//pacote arduinoGenerator.functions
+		ParserTamarino.getInstance().addAlias("pinMode", PinMode.class);
+		ParserTamarino.getInstance().addAlias("delay", Delay.class);
+		ParserTamarino.getInstance().addAlias("digitalRead", DigitalRead.class);
+		ParserTamarino.getInstance().addAlias("digitalWrite", DigitalWrite.class);
+		ParserTamarino.getInstance().addAlias("pinMode", PinMode.class);
 	}
 	
 	
@@ -23,7 +40,41 @@ public class Arduino extends Circuit{
 	 * @param inputs List of the input components connected to the arduino
 	 * @param outputs List of the output components connected to the arduino 
 	 */
-	public Arduino(String name,String author) {
-		super(name, author);
+	public Arduino(String name,String author,long creation,String description) {
+		super(name, author,creation,description);
 	}
+
+
+	/**
+	 * @return the setup
+	 */
+	public LinkedList<AbstractFunction> getSetup() {
+		return setup;
+	}
+
+
+	/**
+	 * @param setup the setup to set
+	 */
+	public void setSetup(LinkedList<AbstractFunction> setup) {
+		this.setup = setup;
+	}
+
+
+	/**
+	 * @return the loop
+	 */
+	public LinkedList<AbstractFunction> getLoop() {
+		return loop;
+	}
+
+
+	/**
+	 * @param loop the loop to set
+	 */
+	public void setLoop(LinkedList<AbstractFunction> loop) {
+		this.loop = loop;
+	}
+	
+	
 }

@@ -1,19 +1,52 @@
 package br.ufpe.cin.tamarino.arduinoGenerator.functions;
 
 import br.ufpe.cin.tamarino.arduinoGenerator.AbstractFunction;
-import br.ufpe.cin.tamarino.arduinoGenerator.PinLevels;
 
 public class DigitalRead extends AbstractFunction {
-
+	
+	private int pin;
+	private String variableName;
+	
 	public DigitalRead(int pin, String variableName){
 		super();
-		String data[] = {pin +"", variableName};
-		mountScript(data);
+		this.pin=pin;
+		this.variableName=variableName;	
+		mountScript();
 	}
 	
 	@Override
-	protected void mountScript(String[] data) {
-		script = data[1] +" = digitalRead("+data[0]+");\n";
+	public void mountScript() {
+		script = this.pin +" = digitalRead("+this.variableName+");\n";
 	}
+
+	/**
+	 * @return the pin
+	 */
+	public int getPin() {
+		return pin;
+	}
+
+	/**
+	 * @param pin the pin to set
+	 */
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+
+	/**
+	 * @return the variableName
+	 */
+	public String getVariableName() {
+		return variableName;
+	}
+
+	/**
+	 * @param variableName the variableName to set
+	 */
+	public void setVariableName(String variableName) {
+		this.variableName = variableName;
+	}
+	
+	
 
 }

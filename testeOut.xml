@@ -1,10 +1,37 @@
 <arduino>
     <name>Teste Arduino</name>
-    <author>Giovane</author>    
-    <!-- setup>
-        
+    <author>Giovane</author>
+    <creation>1339510708514</creation>
+    <description>
+        Código gerado para fazer upload no arduino
+        Equipe: David Fraga, David Edson, Ricardo, Giovane
+    </description>    
+    <setup>
+        <pinMode>
+            <pinNumber>13</pinNumber>
+            <function>OUTPUT</function>
+        </pinMode>        
     </setup>
     <loop>
-        
-    </loop-->            
+        <digitalWrite>
+            <pin>13</pin>
+            <level>HIGH</level>
+        </digitalWrite>
+        <delay>
+            <time>1000</time>            
+        </delay>
+        <digitalWrite>
+            <pin>13</pin>
+            <level>LOW</level>
+        </digitalWrite>
+        <delay>
+            <time>1000</time>            
+        </delay>
+    </loop>            
 </arduino>
+
+<!-- 
+- for
+- switch
+- if
+ -->

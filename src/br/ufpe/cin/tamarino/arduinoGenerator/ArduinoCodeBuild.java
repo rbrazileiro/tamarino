@@ -38,11 +38,11 @@ public class ArduinoCodeBuild {
 		loopFluxogram.remove(function);
 	}
 	
-	public boolean processCode(){
+	public boolean processCode(StringBuffer header){
 		boolean result = false;
 		
 		// Montagem do código
-		addCodeHeader();
+		addCodeHeader(header);
 		// função SETUP
 		code += "void setup(){\n";
 		for (AbstractFunction function : setupFluxogram) {
@@ -69,10 +69,8 @@ public class ArduinoCodeBuild {
 		return result;
 	}
 	
-	private void addCodeHeader() {
-		code ="/* Código gerado para fazer upload no arduino\n";
-		code+="\tEquipe: David Fraga, David Edson, Ricardo, Giovane\n";
-		code+="*/\n\n";
+	private void addCodeHeader(StringBuffer buffer) {
+		code ="/* \n"+buffer.toString()+" \n*/\n\n";
 	}
 
 	private boolean saveCode(){

@@ -4,5 +4,5 @@ public abstract class AbstractFunction {
 
 	protected String script;
 	
-	protected abstract void mountScript(String[] data);
+	public abstract void mountScript();
 }

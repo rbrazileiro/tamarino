@@ -4,16 +4,49 @@ import br.ufpe.cin.tamarino.arduinoGenerator.AbstractFunction;
 import br.ufpe.cin.tamarino.arduinoGenerator.PinLevels;
 
 public class DigitalWrite extends AbstractFunction {
-
+	private int pin;
+	private PinLevels level;
+		
 	public DigitalWrite(int pin, PinLevels level){
 		super();
-		String data[] = {pin +"", level.toString()};
-		mountScript(data);
+		this.pin=pin;
+		this.level=level;		
+		mountScript();
 	}
 	
 	@Override
-	protected void mountScript(String[] data) {
-		script = "digitalWrite("+data[0]+","+data[1]+");\n";
+	public void mountScript() {
+		script = "digitalWrite("+this.pin+","+this.level.toString()+");\n";
 	}
+
+	/**
+	 * @return the pin
+	 */
+	public int getPin() {
+		return pin;
+	}
+
+	/**
+	 * @param pin the pin to set
+	 */
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+
+	/**
+	 * @return the level
+	 */
+	public PinLevels getLevel() {
+		return level;
+	}
+
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(PinLevels level) {
+		this.level = level;
+	}
+	
+	
 
 }
