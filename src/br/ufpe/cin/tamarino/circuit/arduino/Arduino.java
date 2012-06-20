@@ -2,7 +2,7 @@ package br.ufpe.cin.tamarino.circuit.arduino;
 
 import java.util.LinkedList;
 
-import br.ufpe.cin.tamarino.arduinoGenerator.AbstractFunction;
+import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.Delay;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalRead;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalWrite;
@@ -20,8 +20,8 @@ import br.ufpe.cin.tamarino.xml.ParserTamarino;
  */
 public class Arduino extends Circuit{	
 	
-	private LinkedList<AbstractFunction> setup;
-	private LinkedList<AbstractFunction> loop;
+	private LinkedList<AbstractScript> setup;
+	private LinkedList<AbstractScript> loop;
 	
 	static{
 		ParserTamarino.getInstance().addAlias("arduino", Arduino.class);
@@ -48,7 +48,7 @@ public class Arduino extends Circuit{
 	/**
 	 * @return the setup
 	 */
-	public LinkedList<AbstractFunction> getSetup() {
+	public LinkedList<AbstractScript> getSetup() {
 		return setup;
 	}
 
@@ -56,7 +56,7 @@ public class Arduino extends Circuit{
 	/**
 	 * @param setup the setup to set
 	 */
-	public void setSetup(LinkedList<AbstractFunction> setup) {
+	public void setSetup(LinkedList<AbstractScript> setup) {
 		this.setup = setup;
 	}
 
@@ -64,7 +64,7 @@ public class Arduino extends Circuit{
 	/**
 	 * @return the loop
 	 */
-	public LinkedList<AbstractFunction> getLoop() {
+	public LinkedList<AbstractScript> getLoop() {
 		return loop;
 	}
 
@@ -72,7 +72,7 @@ public class Arduino extends Circuit{
 	/**
 	 * @param loop the loop to set
 	 */
-	public void setLoop(LinkedList<AbstractFunction> loop) {
+	public void setLoop(LinkedList<AbstractScript> loop) {
 		this.loop = loop;
 	}
 	

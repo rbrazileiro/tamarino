@@ -1,12 +1,13 @@
 package br.ufpe.cin.tamarino.arduinoGenerator.functions;
 
-import br.ufpe.cin.tamarino.arduinoGenerator.AbstractFunction;
+import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
 import br.ufpe.cin.tamarino.arduinoGenerator.PinLevels;
 
-public class DigitalWrite extends AbstractFunction {
+public class DigitalWrite extends AbstractScript {
+
 	private int pin;
 	private PinLevels level;
-		
+
 	public DigitalWrite(int pin, PinLevels level){
 		super();
 		this.pin=pin;
@@ -14,9 +15,14 @@ public class DigitalWrite extends AbstractFunction {
 		mountScript();
 	}
 	
+	public DigitalWrite(){
+		super();
+	}
+	
 	@Override
 	public void mountScript() {
-		script = "digitalWrite("+this.pin+","+this.level.toString()+");\n";
+		addTabs();
+		script += "digitalWrite("+pin+","+level+");\n";
 	}
 
 	/**

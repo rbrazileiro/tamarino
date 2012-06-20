@@ -13,28 +13,28 @@ public class ArduinoCodeBuild {
 	private File finalFile;
 	private String filePath;
 	
-	private List<AbstractFunction> setupFluxogram;
-	private List<AbstractFunction> loopFluxogram;
+	private List<AbstractScript> setupFluxogram;
+	private List<AbstractScript> loopFluxogram;
 	
 	public ArduinoCodeBuild(){
 		this.filePath = System.getProperty("user.dir");
-		setupFluxogram = new ArrayList<AbstractFunction>();
-		loopFluxogram = new ArrayList<AbstractFunction>();
+		setupFluxogram = new ArrayList<AbstractScript>();
+		loopFluxogram = new ArrayList<AbstractScript>();
 	}
 	
-	public void addSetupFunction(AbstractFunction function){
+	public void addSetupFunction(AbstractScript function){
 		setupFluxogram.add(setupFluxogram.size(), function);
 	}
 	
-	public void removeSetupFunction(AbstractFunction function){
+	public void removeSetupFunction(AbstractScript function){
 		setupFluxogram.remove(function);
 	}
 	
-	public void addLoopFunction(AbstractFunction function){
+	public void addLoopFunction(AbstractScript function){
 		loopFluxogram.add(loopFluxogram.size(), function);
 	}
 	
-	public void removeLoopFunction(AbstractFunction function){
+	public void removeLoopFunction(AbstractScript function){
 		loopFluxogram.remove(function);
 	}
 	
@@ -45,7 +45,7 @@ public class ArduinoCodeBuild {
 		addCodeHeader(header);
 		// função SETUP
 		code += "void setup(){\n";
-		for (AbstractFunction function : setupFluxogram) {
+		for (AbstractScript function : setupFluxogram) {
 			code += "\t"+function.script;
 		} 
 		
@@ -55,7 +55,7 @@ public class ArduinoCodeBuild {
 		
 		
 		code += "void loop(){\n";
-		for (AbstractFunction lFunction : loopFluxogram) {
+		for (AbstractScript lFunction : loopFluxogram) {
 			code += "\t"+lFunction.script;
 		}
 		

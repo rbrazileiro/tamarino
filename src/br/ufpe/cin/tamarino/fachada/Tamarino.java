@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
-import br.ufpe.cin.tamarino.arduinoGenerator.AbstractFunction;
+import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
 import br.ufpe.cin.tamarino.arduinoGenerator.ArduinoCodeBuild;
 import br.ufpe.cin.tamarino.circuit.Circuit;
 import br.ufpe.cin.tamarino.circuit.arduino.Arduino;
@@ -45,17 +45,17 @@ public class Tamarino {
 			ArduinoCodeBuild acb=new ArduinoCodeBuild();
 			
 			//adicionando as funções do setup
-			LinkedList<AbstractFunction> setup=ard.getSetup();
+			LinkedList<AbstractScript> setup=ard.getSetup();
 			for(int i=0;i<setup.size();i++){
-				AbstractFunction af=setup.get(i);
+				AbstractScript af=setup.get(i);
 				af.mountScript();
 				acb.addSetupFunction(af);
 			}
 			
 			//adicionando as funções do loop
-			LinkedList<AbstractFunction> loop=ard.getLoop();
+			LinkedList<AbstractScript> loop=ard.getLoop();
 			for(int i=0;i<loop.size();i++){
-				AbstractFunction af=loop.get(i);
+				AbstractScript af=loop.get(i);
 				af.mountScript();
 				acb.addLoopFunction(loop.get(i));
 			}

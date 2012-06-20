@@ -1,22 +1,29 @@
 package br.ufpe.cin.tamarino.arduinoGenerator.functions;
 
-import br.ufpe.cin.tamarino.arduinoGenerator.AbstractFunction;
+import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
 import br.ufpe.cin.tamarino.arduinoGenerator.PinFunctions;
 
-public class PinMode extends AbstractFunction {
+public class PinMode extends AbstractScript {
+
 	private int pinNumber;
 	private PinFunctions function;
-	
-	public PinMode(int pinNumber, PinFunctions function){
+
+	public PinMode(int pinNumber, PinFunctions function) {
 		super();
-		this.pinNumber=pinNumber;
-		this.function=function;		
+		this.pinNumber = pinNumber;
+		this.function = function;
+		String[] data = { this.pinNumber + "", function.name() };
 		mountScript();
 	}
 	
+	public PinMode(){
+		super();
+	}
+
 	@Override
 	public void mountScript() {
-		script = "pinmode("+pinNumber+","+function.toString()+");\n";
+		addTabs();
+		script += "pinmode(" + pinNumber + "," + function + ");\n";
 	}
 
 	/**
@@ -27,7 +34,8 @@ public class PinMode extends AbstractFunction {
 	}
 
 	/**
-	 * @param pinNumber the pinNumber to set
+	 * @param pinNumber
+	 *            the pinNumber to set
 	 */
 	public void setPinNumber(int pinNumber) {
 		this.pinNumber = pinNumber;
@@ -41,12 +49,11 @@ public class PinMode extends AbstractFunction {
 	}
 
 	/**
-	 * @param function the function to set
+	 * @param function
+	 *            the function to set
 	 */
 	public void setFunction(PinFunctions function) {
 		this.function = function;
 	}
-	
-	
 
 }
