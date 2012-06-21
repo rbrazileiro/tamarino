@@ -7,19 +7,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufpe.cin.tamarino.conf.Conf;
+import br.ufpe.cin.tamarino.conf.Conf.ConfKeys;
+
 public class ArduinoCodeBuild {
 
 	private String code;
-	private File finalFile;
-	private String filePath;
+	private File finalFile;	
 	
 	private List<AbstractScript> setupFluxogram;
 	private List<AbstractScript> loopFluxogram;
 	
-	public ArduinoCodeBuild(){
-		this.filePath = System.getProperty("user.dir");
+	public ArduinoCodeBuild(){		
 		setupFluxogram = new ArrayList<AbstractScript>();
 		loopFluxogram = new ArrayList<AbstractScript>();
+		finalFile = new File(Conf.getInstance().getProperty(ConfKeys.PATH_TEMP)+"/arduinoCode.ino");
 	}
 	
 	public void addSetupFunction(AbstractScript function){
@@ -36,6 +38,10 @@ public class ArduinoCodeBuild {
 	
 	public void removeLoopFunction(AbstractScript function){
 		loopFluxogram.remove(function);
+	}
+	
+	public File getFinalFile(){
+		return this.finalFile;
 	}
 	
 	public boolean processCode(StringBuffer header){
@@ -75,10 +81,6 @@ public class ArduinoCodeBuild {
 
 	private boolean saveCode(){
 		boolean result = false;
-		
-		if (finalFile == null || !finalFile.exists()) {
-			finalFile = new File(filePath+"/arduinoCode.ino");
-		}
 		
 		try {
 			BufferedWriter br = new BufferedWriter(new FileWriter(finalFile));

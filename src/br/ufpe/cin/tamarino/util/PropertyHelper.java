@@ -1,5 +1,7 @@
 package br.ufpe.cin.tamarino.util;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -10,13 +12,11 @@ import java.util.ResourceBundle;
 
 public class PropertyHelper {
 	
-	public static Properties load(String name,ClassLoader loader){
+	public static final String SUFFIX=".properties";
+	
+	public static Properties load(boolean loadAsResourceBundle,String name,ClassLoader loader){
 		if(name==null){
 			throw new IllegalArgumentException("null input: name");
-		}
-		
-		if(loader==null){
-			loader=ClassLoader.getSystemClassLoader();
 		}
 		
 		if(name.startsWith("/")){
@@ -27,7 +27,7 @@ public class PropertyHelper {
 		
 		InputStream in=null;
 		try{
-			if(LOAD_AS_RESOURCE_BUNDLE){
+			if(loadAsResourceBundle){
 				name=name.replace('/', '.');
 				final ResourceBundle rb=ResourceBundle.getBundle(name,Locale.getDefault(),loader);
 				result=new Properties();
@@ -38,12 +38,17 @@ public class PropertyHelper {
 					result.put(key, value);
 				}
 			}else{
-				name=name.replace('.', '/');
-				if(name.endsWith(SUFFIX)){
+				//name=name.replace('.', '/');
+				if(!name.endsWith(SUFFIX)){
 					name=name.concat(SUFFIX);					
 				}
 				
-				in=loader.getResourceAsStream(name);
+				if(loader!=null){
+					in=loader.getResourceAsStream(name);
+				}else{
+					in=new FileInputStream(new File(name));
+				}
+				
 				if(in!=null){
 					result=new Properties();
 					result.load(in);
@@ -66,8 +71,4 @@ public class PropertyHelper {
 		
 		return result;
 	}
-	
-	public static final boolean LOAD_AS_RESOURCE_BUNDLE=true;
-	public static final String SUFFIX=".properties";
-
 }

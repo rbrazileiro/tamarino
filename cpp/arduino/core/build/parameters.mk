@@ -26,7 +26,7 @@ endif
 CC=avr-gcc
 CXX=avr-g++
 VARIANTS_ORIGIN=src/variants
-FLAGS_INCLUDES=-I"/mnt/dados/workspace/cpp/arduino-core/src"
+FLAGS_INCLUDES=-I'/mnt/dados/workspace/cpp/arduino-core/src'
 COMMON_FLAGS=-Wall -Os -ffunction-sections -fdata-sections -fno-exceptions -MMD -MP
 OUTPUT=../bin/$(TYPE)
 OUTPUT_OBJECT=$(OUTPUT)/objects

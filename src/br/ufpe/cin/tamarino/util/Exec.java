@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 
 /**
  * 
@@ -57,30 +58,23 @@ public class Exec {
 	 * @throws IOException 
 	 * @throws InterruptedException 
 	 */
-	public void run(String command) throws IOException, InterruptedException{
-		if(command==null||command.equalsIgnoreCase("")){
+	public void run(LinkedList<String> cmd) throws IOException, InterruptedException{
+		if(cmd==null||cmd.size()==0){
 			System.err.println("Invalid command!!");
 			System.exit(1);
 		}
 		
-		String osName=System.getProperty("os.name");
-		String[] cmd=new String[3];
+		String osName=System.getProperty("os.name");		
 		if(osName.equalsIgnoreCase("Windows 95")){
-			cmd[0]="command.com";
-			cmd[1]="/C";
-			cmd[2]=command;
+			cmd.add(0,"command.com");
+			cmd.add(1,"/C");			
 		}else if(osName.startsWith("Win")){
-			cmd[0]="cmd.exe";
-			cmd[1]="/C";
-			cmd[2]=command;
-		}else{
-			cmd[0]=command;
-			cmd[1]="";
-			cmd[2]=""; //linux
+			cmd.add(0,"cmd.exe");
+			cmd.add(1,"/C");			
 		}
 		
 		Runtime rt=Runtime.getRuntime();
-		Process proc=rt.exec(cmd);
+		Process proc=rt.exec((String[]) cmd.toArray());
 		
 		StreamGobbler error=new StreamGobbler(proc.getErrorStream(), "ERROR");
 		StreamGobbler output=new StreamGobbler(proc.getInputStream(), "OUTPUT");
@@ -96,7 +90,9 @@ public class Exec {
 	
 	public static void main(String[] args){
 		try {
-			Exec.getInstance().run("pwd");
+			LinkedList<String> list=new LinkedList<String>();
+			list.add("pwd");
+			Exec.getInstance().run(list);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

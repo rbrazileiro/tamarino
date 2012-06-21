@@ -19,12 +19,11 @@ public class Conf {
 	private Properties prop;
 	
 	private Conf(){
-		this.prop=PropertyHelper.load(propFile.getPath(), null);
+		this.prop=PropertyHelper.load(false,propFile.getPath(), null);
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return The unique instance of <code>Conf</code>
 	 */
 	public static Conf getInstance(){
 		if(instance==null){
@@ -33,17 +32,60 @@ public class Conf {
 		return instance;
 	}
 	
+	/**
+	 * @param key The property's key. See {@link ConfKeys}
+	 * @return The value of property specified by the key.
+	 */
 	public String getProperty(ConfKeys key){
 		return prop.getProperty(key.toString());
 	}
 	
+	/**
+	 * List of property keys of the file conf.properties
+	 * @author Giovane Boaviagem
+	 * @since 21/06/2012
+	 */
 	public enum ConfKeys{
-		PATH_TEMP;
+		/**
+		 * Path to the temp folder
+		 */
+		PATH_TEMP,
+		/**
+		 * Path to the cpp folder
+		 */
+		PATH_CPP,
+		/**
+		 * Path to the arduino-core's folder
+		 */
+		PATH_CPP_ARDUINO_CORE,
+		/**
+		 * Path to the arduino-core's bin folder
+		 */
+		PATH_CPP_ARDUINO_CORE_BIN,
+		/**
+		 * Path to the arduino-core's src folder
+		 */
+		PATH_CPP_ARDUINO_CORE_SRC,
+		/**
+		 * Path to the avr's bin folder (linux 64 bits)
+		 */
+		PATH_CPP_TOOLS_LINUX64_AVR_BIN;
 		
+		@Override
 		public String toString(){
 			switch(this){
 			case PATH_TEMP:
-				return "path.temp";				
+				return "path.temp";
+			case PATH_CPP:
+				return "path.cpp";
+			case PATH_CPP_ARDUINO_CORE:
+				return "path.cpp.arduino.core";
+			case PATH_CPP_ARDUINO_CORE_BIN:
+				return "path.cpp.arduino.core.bin";
+			case PATH_CPP_ARDUINO_CORE_SRC:
+				return "path.cpp.arduino.core.src";
+			case PATH_CPP_TOOLS_LINUX64_AVR_BIN:
+				return "path.cpp.tools.linux64.avr.bin";
 			default:
 				return "KEY_NOT_SPECIFIED!";
 			}

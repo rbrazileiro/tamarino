@@ -18,20 +18,10 @@ public class ArduinoBurner {
 	 * 
 	 * @param codeArduino
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 */
-	public static void burn(File codeArduino,Arduino board) throws IOException{
+	public static void burn(File codeArduino,Arduino board) throws IOException, InterruptedException{
 		HexGenerator hex=new HexGenerator(codeArduino,board);
 		hex.generate();		
 	}
-	
-//	public static void main(String[] args){
-//		try {
-//			ArduinoBurner.burn(new File("arduinoCode.ino"),board);
-//			System.out.println("acabou.");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
 }
