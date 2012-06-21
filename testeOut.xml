@@ -5,7 +5,8 @@
     <description>
         Código gerado para fazer upload no arduino
         Equipe: David Fraga, David Edson, Ricardo, Giovane
-    </description>    
+    </description>
+    <type>UNO</type>
     <setup>
         <pinMode>
             <pinNumber>13</pinNumber>

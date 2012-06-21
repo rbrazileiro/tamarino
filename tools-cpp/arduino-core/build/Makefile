@@ -5,11 +5,6 @@
 
 -include parameters.mk
 
-ifeq ($(TYPE),UNO)
-	FLAGS_CPU=-mmcu=atmega328 -DF_CPU=16000000UL
-	VARIANTS_ORIGIN=$(INPUT)/variants/standard
-endif
-
 all: build	
 
 -include make-core.mk
@@ -21,10 +16,11 @@ clean:
 init: clean
 	@echo "***** Build of project arduino-core for $(TYPE) board *****"
 	@echo
-	@mkdir $(OUTPUT)
-	@mkdir $(OUTPUT_DEPENDENCIES)
-	@mkdir $(OUTPUT_OBJECT)
-	@cp -v $(VARIANTS_ORIGIN)/pins_arduino.h $(INPUT)
+	@mkdir -p $(OUTPUT)
+	@mkdir -p $(OUTPUT_DEPENDENCIES)
+	@mkdir -p $(OUTPUT_OBJECT)	
+	pwd
+	@cp -v ../$(VARIANTS_ORIGIN)/$(PINS_ARDUINO_FOLDER)/pins_arduino.h $(INPUT)
 	
 libarduino-core.a: init make-core make-libraries
 	@echo	

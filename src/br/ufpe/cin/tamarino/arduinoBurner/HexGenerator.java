@@ -20,7 +20,7 @@ class HexGenerator {
 	private static final File pathTools=new File("tools-cpp");
 	
 	private StringBuffer inoFile;
-	private Arduino ard;
+	private Arduino board;
 	
 	
 	/**
@@ -28,7 +28,7 @@ class HexGenerator {
 	 * @param codeArduino
 	 * @throws IOException 
 	 */
-	public HexGenerator(File codeArduino, Arduino ard) throws IOException{
+	public HexGenerator(File codeArduino, Arduino board) throws IOException{
 		this.inoFile=new StringBuffer("");
 		
 		for(String line:FileHelper.readFile(codeArduino)){
@@ -65,6 +65,10 @@ class HexGenerator {
 				fw.close();
 			}
 		}		
+	}
+	
+	public void compileMainCPP(){
+		
 	}
 	
 	public void generate() throws IOException{

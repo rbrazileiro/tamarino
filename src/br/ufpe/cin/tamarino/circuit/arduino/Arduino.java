@@ -18,8 +18,8 @@ import br.ufpe.cin.tamarino.xml.ParserTamarino;
  * @since 06/06/2012
  *
  */
-public class Arduino extends Circuit{	
-	
+public class Arduino extends Circuit{
+	private ArduinoType type;	
 	private LinkedList<AbstractScript> setup;
 	private LinkedList<AbstractScript> loop;
 	
@@ -40,7 +40,7 @@ public class Arduino extends Circuit{
 	 * @param inputs List of the input components connected to the arduino
 	 * @param outputs List of the output components connected to the arduino 
 	 */
-	public Arduino(String name,String author,long creation,String description) {
+	public Arduino(String name,String author,long creation,String description,ArduinoType type) {
 		super(name, author,creation,description);
 	}
 
@@ -74,6 +74,22 @@ public class Arduino extends Circuit{
 	 */
 	public void setLoop(LinkedList<AbstractScript> loop) {
 		this.loop = loop;
+	}
+
+
+	/**
+	 * @return the type
+	 */
+	public ArduinoType getType() {
+		return type;
+	}
+
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(ArduinoType type) {
+		this.type = type;
 	}
 	
 	
