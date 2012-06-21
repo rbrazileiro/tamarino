@@ -1,0 +1,31 @@
+
+**** Build of configuration Debug for project helloArduino ****
+
+make all 
+Building file: ../src/main.cpp
+Invoking: AVR C++ Compiler
+avr-g++ -I"/mnt/dados/workspace/cpp/arduino-core/src" -Wall -Os -ffunction-sections -fdata-sections -fno-exceptions "-Wl,--gc-sections" -mmcu=atmega328 -DF_CPU=16000000UL -MMD -MP -MF"src/main.d" -MT"src/main.d" -c -o "src/main.o" "../src/main.cpp"
+Finished building: ../src/main.cpp
+ 
+Building target: helloArduino.elf
+Invoking: AVR C++ Linker
+avr-g++ -Wl,-Map,helloArduino.map,--cref -L"/mnt/dados/workspace/cpp/arduino-core/build/bin" -mmcu=atmega328 -o "helloArduino.elf"  ./src/main.o   -l_arduino-coreUNO -lm -Wl,-Map,helloArduino.map,--cref -L"/mnt/dados/workspace/cpp/arduino-core/build/bin" -mmcu=atmega328
+Finished building target: helloArduino.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S helloArduino.elf  >"helloArduino.lss"
+Finished building: helloArduino.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex helloArduino.elf  "helloArduino.hex"
+Finished building: helloArduino.hex
+ 
+Invoking: Print Size
+avr-size --format=berkeley -t helloArduino.elf
+   text    data     bss     dec     hex filename
+   1218       2       9    1229     4cd helloArduino.elf
+   1218       2       9    1229     4cd (TOTALS)
+Finished building: sizedummy
+ 
+
+**** Build Finished ****

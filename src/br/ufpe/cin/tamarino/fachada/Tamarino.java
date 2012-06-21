@@ -19,6 +19,8 @@ import br.ufpe.cin.tamarino.xml.ParserTamarino;
  */
 public class Tamarino {
 	
+	public static final File TEMP_FOLDER=new File("temp");
+	
 	private Circuit circ;
 
 	
@@ -32,13 +34,18 @@ public class Tamarino {
 			throw new NullPointerException("XML file can't be null!!");
 		}
 		
+		//se a pasta temporaria nao existir, crie-a
+		if(!TEMP_FOLDER.exists()){
+			TEMP_FOLDER.mkdirs();
+		}
+		
 		this.circ=(Circuit) ParserTamarino.getInstance().toObject(new FileInputStream(arqXML));
 	}
 	
-	/**
-	 * Executes the system
+	/*
+	 * Mounts the ino file
 	 */
-	public void exec(){
+	private void mountInoFile(){
 		if(this.circ instanceof Arduino){				
 			Arduino ard=(Arduino) this.circ;
 			
@@ -65,6 +72,13 @@ public class Tamarino {
 
 			System.out.println("Arquivo criado com sucesso.");
 		}		
+	}
+	
+	/**
+	 * Executes the system
+	 */
+	public void exec(){
+		mountInoFile();	
 	}
 	
 	
