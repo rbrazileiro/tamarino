@@ -7,7 +7,7 @@ public class Include extends AbstractScript {
 
 	@Override
 	public void mountScript() {
-		this.script="#include <"+this.libName+".h>\n";
+		this.setScript("#include <"+this.libName+".h>\n");		
 	}
 
 	/**

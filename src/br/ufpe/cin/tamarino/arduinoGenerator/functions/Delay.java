@@ -1,13 +1,8 @@
 package br.ufpe.cin.tamarino.arduinoGenerator.functions;
 
 import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
-import br.ufpe.cin.tamarino.xml.ParserTamarino;
 
 public class Delay extends AbstractScript{
-	
-	static{
-		ParserTamarino.getInstance().addAlias("delay", Delay.class);
-	}
 	
 	private long time;
 
@@ -22,8 +17,8 @@ public class Delay extends AbstractScript{
 	}
 
 	@Override
-	public void mountScript() {
-		script = "delay("+this.time+");\n";
+	public void mountScript() {		
+		this.setScript("delay("+this.time+");\n");
 	}
 
 	/**

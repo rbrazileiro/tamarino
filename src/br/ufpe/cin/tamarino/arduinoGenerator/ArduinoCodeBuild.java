@@ -64,12 +64,14 @@ public class ArduinoCodeBuild {
 		boolean result = false;
 		
 		// Montagem do código
+		
+		//CABECALHO E DESCRICAO
 		addCodeHeader(header);
 		
 		//INCLUDES
 		for(AbstractScript inc : includeFluxogram){
 			inc.mountScript();
-			code.append(inc.script);
+			code.append(inc.getScript());
 		}
 		
 		code.append("\n");
@@ -77,17 +79,19 @@ public class ArduinoCodeBuild {
 		//VARIAVEIS GLOBAIS
 		for(AbstractScript global:varDeclarationFluxogram){
 			global.mountScript();
-			code.append(global.script);
+			code.append(global.getScript());
 		}
 		
 		code.append("\n");
 		
-		// função SETUP
+		// função SETUP		
 		code.append("void setup(){\n");
+		AbstractScript.addTabs();
 		for (AbstractScript function : setupFluxogram) {
 			function.mountScript();
-			code.append("\t"+function.script);
+			code.append(function.getScript());
 		}
+		AbstractScript.remTabs();
 		
 		code.append("}\n\n");
 		
@@ -95,11 +99,12 @@ public class ArduinoCodeBuild {
 		
 		
 		code.append("void loop(){\n");
+		AbstractScript.addTabs();
 		for (AbstractScript lFunction : loopFluxogram) {
 			lFunction.mountScript();
-			code.append("\t"+lFunction.script);
+			code.append(lFunction.getScript());
 		}
-		
+		AbstractScript.remTabs();
 		code.append("}\n");
 		
 		// Fim da montagem do código
@@ -111,7 +116,7 @@ public class ArduinoCodeBuild {
 	}
 	
 	private void addCodeHeader(StringBuffer buffer) {
-		code.append("/* \n"+buffer.toString()+" \n*/\n\n");
+		code.append("/** \n"+buffer.toString()+" \n*/\n\n");
 	}
 
 	private boolean saveCode(){

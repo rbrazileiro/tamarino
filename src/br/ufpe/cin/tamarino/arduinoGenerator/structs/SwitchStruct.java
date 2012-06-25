@@ -1,11 +1,5 @@
 package br.ufpe.cin.tamarino.arduinoGenerator.structs;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.javatuples.Pair;
 
 import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
@@ -44,25 +38,23 @@ public class SwitchStruct extends AbstractScript {
 
 	@Override
 	public void mountScript() {		
-		addTabs();
-		script = "switch ("+condition+"){\n";
-		
-		for (int i=1; i<tuple.length; i++){
-			Pair<String, Block> tupleTmp = (Pair<String, Block>) tuple[i];
-			addTabs();
-			script += "\tcase "+tupleTmp.getValue0()+":\n";
-			Block block = (Block) tupleTmp.getValue1();
-			for (AbstractScript item : block.getScriptList()) {
-				addTabs();
-				script += "\t" + item.getScript();
-			}
+		String script = "switch ("+condition+"){\n";		
+		for (int i=0; i<tuple.length; i++){
+			Pair<String, Block> tupleTmp = (Pair<String, Block>) tuple[i];		
+			script += "case "+tupleTmp.getValue0()+":\n";
 			
+			Block block = (Block) tupleTmp.getValue1();
 			addTabs();
-			script += "\tbreak;\n";
+			for (AbstractScript item : block.getScriptList()) {		
+				item.mountScript();
+				script += item.getScript();				
+			}
+			remTabs();
+			script += "break;\n";
 		}
-		addTabs();
 		script += "}\n";
-
+		
+		this.setScript(script);
 	}
 
 }

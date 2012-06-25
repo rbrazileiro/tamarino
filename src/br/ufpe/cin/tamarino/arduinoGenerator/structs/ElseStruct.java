@@ -27,16 +27,16 @@ public class ElseStruct extends AbstractScript {
 	}
 	
 	@Override
-	public void mountScript() {
+	public void mountScript() {		
+		String script = "else {\n";
 		addTabs();
-		script += "else {\n";
-		for (AbstractScript item : block.getScriptList()) {
-			addTabs();
-			script += "\t" + item.getScript();
+		for (AbstractScript item : block.getScriptList()) {			
+			script += item.getScript();
 		}
-		addTabs();
+		remTabs();
 		script += "}\n";
-
+		
+		this.setScript(script);
 	}
 
 }

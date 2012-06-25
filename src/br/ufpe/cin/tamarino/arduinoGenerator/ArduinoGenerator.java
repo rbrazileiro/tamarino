@@ -1,7 +1,11 @@
 package br.ufpe.cin.tamarino.arduinoGenerator;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.Include;
 import br.ufpe.cin.tamarino.circuit.arduino.Arduino;
@@ -46,7 +50,28 @@ public class ArduinoGenerator {
 			acb.addLoopFunction(loop.get(i));
 		}
 		
-		StringBuffer description=new StringBuffer(ard.getDescription());
+		StringBuffer description=new StringBuffer("");
+		
+		description.append(" * +++ "+ard.getName()+" +++\n* \n");
+		
+		StringTokenizer st=new StringTokenizer(ard.getDescription(), "\n");
+		while(st.hasMoreElements()){
+			String line=(String) st.nextElement();
+			description.append(" * "+line.trim()+"\n");
+		}
+		
+		
+		description.append(" * @author "+ard.getAuthor()+"\n");
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+		Date d=Calendar.getInstance().getTime();
+		d.setTime(ard.getCreation());
+		description.append(" * @since "+sdf.format(d)+"\n");	
+		
+		description.append(" * \n");
+		
+			
+		
 		acb.processCode(description);
 		
 		return acb.getFinalFile();

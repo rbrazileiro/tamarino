@@ -1,22 +1,33 @@
 package br.ufpe.cin.tamarino.arduinoGenerator;
 
-public abstract class AbstractScript {
-
-	protected String script = "";
-
+public abstract class AbstractScript {	
 	private static int degree = 0;
+	
+	private String script;
+	
+	public AbstractScript(){
+		this.script="";
+	}
 
 	public abstract void mountScript();
 	
 	public String getScript() {
-		return script;
+		StringBuffer tabs=new StringBuffer("");
+		for(int i=0;i<degree;i++){
+			tabs.append("\t");
+		}
+		return tabs.toString()+script;
+	}
+	
+	protected void setScript(String script){
+		this.script=script;
 	}
 
-	public void addTabs() {
+	protected static void addTabs() {
 		degree++;
 	}
 	
-	public void remTabs(){
+	protected static void remTabs(){
 		degree--;
 	}
 }

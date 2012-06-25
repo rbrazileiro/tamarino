@@ -14,7 +14,7 @@ public class ServoRead extends AbstractScript{
 	
 	@Override
 	public void mountScript() {
-		this.script=varName + " = "+ servoName+".read();\n";		
+		this.setScript(varName + " = "+ servoName+".read();\n");		
 	}
 
 	/**

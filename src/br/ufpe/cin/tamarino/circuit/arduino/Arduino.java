@@ -10,7 +10,6 @@ import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalRead;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalWrite;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.Include;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.PinMode;
-import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.Servo;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.ServoAttach;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.ServoDetach;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.ServoRead;
@@ -42,8 +41,7 @@ public class Arduino extends Circuit{
 		ParserTamarino.getInstance().addAlias("delay", Delay.class);
 		ParserTamarino.getInstance().addAlias("digitalRead", DigitalRead.class);
 		ParserTamarino.getInstance().addAlias("digitalWrite", DigitalWrite.class);
-		ParserTamarino.getInstance().addAlias("pinMode", PinMode.class);
-		ParserTamarino.getInstance().addAlias("servo", Servo.class);
+		ParserTamarino.getInstance().addAlias("pinMode", PinMode.class);		
 		ParserTamarino.getInstance().addAlias("servoAttach", ServoAttach.class);
 		ParserTamarino.getInstance().addAlias("servoDetach", ServoDetach.class);
 		ParserTamarino.getInstance().addAlias("servoRead", ServoRead.class);

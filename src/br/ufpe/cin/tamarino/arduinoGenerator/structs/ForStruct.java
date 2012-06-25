@@ -3,7 +3,6 @@ package br.ufpe.cin.tamarino.arduinoGenerator.structs;
 import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
 import br.ufpe.cin.tamarino.arduinoGenerator.Block;
 import br.ufpe.cin.tamarino.arduinoGenerator.VarDeclaration;
-import br.ufpe.cin.tamarino.xml.ParserTamarino;
 
 public class ForStruct extends AbstractScript {
 
@@ -58,15 +57,19 @@ public class ForStruct extends AbstractScript {
 
 	@Override
 	public void mountScript() {
-		addTabs();		
-		script += "for ("+param1.toString().trim()+";"+param2+";"+param3+"){\n";
-		for (AbstractScript item : block.getScriptList()) {
-			addTabs();
-			item.mountScript();
-			script += "\t" + item.getScript();
-		}
-		script += "}\n";
+		param1.mountScript();
+		String scriptParam1=param1.getScript().trim();		
+		String script = "for ("+scriptParam1.substring(0,scriptParam1.length()-1)+";"+param2+";"+param3+"){\n";
 		addTabs();
+		for (AbstractScript item : block.getScriptList()) {			
+			item.mountScript();
+			script += item.getScript();
+		}
+		remTabs();
+		script += "}\n";
+		
+		
+		this.setScript(script);
 	}
 
 }

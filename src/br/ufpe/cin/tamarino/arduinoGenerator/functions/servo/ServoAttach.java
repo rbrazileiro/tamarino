@@ -13,8 +13,8 @@ public class ServoAttach extends AbstractScript{
 	private int pin;
 
 	@Override
-	public void mountScript() {
-		this.script=this.servoName+".attach("+this.pin+");\n";		
+	public void mountScript() {		
+		this.setScript(this.servoName+".attach("+this.pin+");\n");
 	}
 
 	/**

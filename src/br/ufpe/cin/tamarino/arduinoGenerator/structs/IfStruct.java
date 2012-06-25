@@ -36,16 +36,17 @@ public class IfStruct extends AbstractScript {
 	}
 
 	@Override
-	public void mountScript() {
+	public void mountScript() {		
+		String script = "if ("+condition+"){\n";
 		addTabs();
-		script = "if ("+condition+"){\n";
-		for (AbstractScript item : block.getScriptList()) {
-			addTabs();
-			script += "\t" + item.getScript();
-		}
-		addTabs();
+		for (AbstractScript item : block.getScriptList()) {	
+			item.mountScript();
+			script += item.getScript();
+		}		
 		script += "}\n";
-
+		remTabs();
+		
+		this.setScript(script);
 	}
 
 }

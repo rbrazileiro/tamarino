@@ -14,7 +14,8 @@ public class ServoWrite extends AbstractScript{
 
 	@Override
 	public void mountScript() {
-		this.script=servoName+".write("+value+");\n";		
+		String script=servoName+".write("+value+");\n";
+		this.setScript(script);
 	}
 
 	/**

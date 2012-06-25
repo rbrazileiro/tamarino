@@ -21,8 +21,7 @@ public class DigitalWrite extends AbstractScript {
 	
 	@Override
 	public void mountScript() {
-		addTabs();
-		script += "digitalWrite("+pin+","+level+");\n";
+		this.setScript("digitalWrite("+pin+","+level+");\n");
 	}
 
 	/**

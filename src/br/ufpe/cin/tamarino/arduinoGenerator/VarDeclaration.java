@@ -21,22 +21,17 @@ public class VarDeclaration extends AbstractScript {
 
 	@Override
 	public void mountScript() {
+		String script="";	
 		if(value==null|| value.equalsIgnoreCase("")){
 			script = this.typeVar +" "+this.varName+";\n";
 		}else{
 			script = this.typeVar +" "+this.varName+" = "+this.value+";\n";
-		}		
-	}
-	
-	@Override
-	public String toString(){
-		if(script==null){
-			this.mountScript();
 		}
 		
-		return script.substring(0, script.length()-2); //elimina o ";" final			
+		this.setScript(script);
 	}
-
+	
+	
 	/**
 	 * @return the type
 	 */

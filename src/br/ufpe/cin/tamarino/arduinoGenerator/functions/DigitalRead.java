@@ -1,7 +1,6 @@
 package br.ufpe.cin.tamarino.arduinoGenerator.functions;
 
 import br.ufpe.cin.tamarino.arduinoGenerator.AbstractScript;
-import br.ufpe.cin.tamarino.arduinoGenerator.PinLevels;
 
 public class DigitalRead extends AbstractScript {
 
@@ -21,9 +20,8 @@ public class DigitalRead extends AbstractScript {
 	}
 
 	@Override
-	public void mountScript() {
-		addTabs();
-		script += variableName + " = digitalRead(" + pin + ");\n";
+	public void mountScript() {		
+		this.setScript(variableName + " = digitalRead(" + pin + ");\n");
 	}
 
 	/**

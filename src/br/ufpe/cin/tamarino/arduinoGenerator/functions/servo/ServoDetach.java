@@ -13,7 +13,7 @@ public class ServoDetach extends AbstractScript{
 
 	@Override
 	public void mountScript() {
-		this.script=servoName+".detach();\n";		
+		this.setScript(servoName+".detach();\n");		
 	}
 
 	/**

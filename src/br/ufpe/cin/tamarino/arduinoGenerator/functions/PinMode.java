@@ -11,8 +11,7 @@ public class PinMode extends AbstractScript {
 	public PinMode(int pinNumber, PinFunctions function) {
 		super();
 		this.pinNumber = pinNumber;
-		this.function = function;
-		String[] data = { this.pinNumber + "", function.name() };
+		this.function = function;		
 		mountScript();
 	}
 	
@@ -21,9 +20,8 @@ public class PinMode extends AbstractScript {
 	}
 
 	@Override
-	public void mountScript() {
-		addTabs();
-		script += "pinmode(" + pinNumber + "," + function + ");\n";
+	public void mountScript() {		
+		this.setScript("pinmode(" + pinNumber + "," + function + ");\n");
 	}
 
 	/**
