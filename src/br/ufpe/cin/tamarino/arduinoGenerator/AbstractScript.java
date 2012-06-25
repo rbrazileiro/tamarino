@@ -4,7 +4,7 @@ public abstract class AbstractScript {
 
 	protected String script = "";
 
-	public static int degree = 0;
+	private static int degree = 0;
 
 	public abstract void mountScript();
 	
@@ -13,20 +13,10 @@ public abstract class AbstractScript {
 	}
 
 	public void addTabs() {
-
-		if (script == null) script = "";
-		for (int i = 0; i < degree; i++) {
-			if (script == null || script.equals(""))
-				script = "\t";
-			else
-				script += "\t";
-		}
+		degree++;
 	}
 	
-	protected void decreaseDegree(){
+	public void remTabs(){
 		degree--;
-	}
-	protected void increaseDegree(){
-		degree++;
 	}
 }

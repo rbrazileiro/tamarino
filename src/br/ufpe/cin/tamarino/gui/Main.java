@@ -12,7 +12,7 @@ import br.ufpe.cin.tamarino.fachada.Tamarino;
  *
  */
 public class Main {
-	private static File fileName=new File("testeOut.xml");
+	private static File fileName=new File("teste2.xml");
 	
 	/**
 	 * 

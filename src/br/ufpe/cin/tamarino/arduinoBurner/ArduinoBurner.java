@@ -22,6 +22,6 @@ public class ArduinoBurner {
 	 */
 	public static void burn(File codeArduino,Arduino board) throws IOException, InterruptedException{
 		HexGenerator hex=new HexGenerator(codeArduino,board);
-		hex.generate();		
+		hex.generate();
 	}
 }

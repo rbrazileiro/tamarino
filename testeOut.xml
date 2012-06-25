@@ -6,12 +6,12 @@
         Código gerado para fazer upload no arduino
         Equipe: David Fraga, David Edson, Ricardo, Giovane
     </description>
-    <type>UNO</type>
+    <type>UNO</type>        
     <setup>
         <pinMode>
             <pinNumber>13</pinNumber>
             <function>OUTPUT</function>
-        </pinMode>        
+        </pinMode>
     </setup>
     <loop>
         <digitalWrite>
@@ -30,9 +30,3 @@
         </delay>
     </loop>            
 </arduino>
-
-<!-- 
-- for
-- switch
-- if
- -->

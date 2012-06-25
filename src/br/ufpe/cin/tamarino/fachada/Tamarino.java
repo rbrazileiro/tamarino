@@ -61,14 +61,10 @@ public class Tamarino {
 				System.out.println("Criando arquivo correspondente ao xml gerado.");
 				File fileIno=ArduinoGenerator.generate(ard);
 
-				System.out.println("Gravando o arquivo na placa.");				
-				ArduinoBurner.burn(fileIno, ard);				
+//				System.out.println("Gravando o arquivo na placa.");				
+//				ArduinoBurner.burn(fileIno, ard);				
 			}
-		} catch (IOException e) {			
-			e.printStackTrace();
-		} catch (InterruptedException e) {			
-			e.printStackTrace();
-		}
+		} finally{}
 	}
 	
 	

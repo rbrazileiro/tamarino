@@ -1,0 +1,50 @@
+<arduino>
+    <name>Teste Arduino 2</name>
+    <author>Giovane</author>
+    <creation>1339510708514</creation>
+    <description>
+        Código gerado para fazer upload no arduino
+        Equipe: David Fraga, David Edson, Ricardo, Giovane
+    </description>
+    <type>UNO</type>
+    <includes>
+        <include>
+            <libName>Servo</libName>
+        </include>
+    </includes>
+    <globals>
+        <varDeclaration>
+            <typeVar>Servo</typeVar>
+	        <varName>myServo</varName>
+	        <value/>
+        </varDeclaration>        
+    </globals>
+    <setup>
+        <servoAttach>
+            <servoName>myServo</servoName>
+            <pin>9</pin>
+        </servoAttach>       
+    </setup>
+    <loop>
+        <forStruct>
+            <param1>
+                <typeVar>int</typeVar>
+                <varName>pos</varName>
+                <value>0</value>
+            </param1>
+            <param2>pos&lt;180</param2>
+            <param3>pos+=1</param3>
+            <block>
+                <scripts>
+                    <servoWrite>
+                        <servoName>myServo</servoName>
+                        <value>pos</value>
+                    </servoWrite>
+                    <delay>
+                        <time>15</time>
+                    </delay>
+                </scripts>
+            </block>
+        </forStruct>
+    </loop>            
+</arduino>

@@ -7,22 +7,38 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.Include;
 import br.ufpe.cin.tamarino.conf.Conf;
 import br.ufpe.cin.tamarino.conf.Conf.ConfKeys;
 
 public class ArduinoCodeBuild {
 
-	private String code;
+	private StringBuffer code;
 	private File finalFile;	
 	
+	private List<AbstractScript> includeFluxogram;
+	private List<AbstractScript> varDeclarationFluxogram;
 	private List<AbstractScript> setupFluxogram;
 	private List<AbstractScript> loopFluxogram;
 	
 	public ArduinoCodeBuild(){		
+		code=new StringBuffer("");
 		setupFluxogram = new ArrayList<AbstractScript>();
 		loopFluxogram = new ArrayList<AbstractScript>();
+		includeFluxogram=new ArrayList<AbstractScript>();
+		varDeclarationFluxogram=new ArrayList<AbstractScript>();
 		finalFile = new File(Conf.getInstance().getProperty(ConfKeys.PATH_TEMP)+"/arduinoCode.ino");
 	}
+	
+	public void addInclude(Include inc){
+		includeFluxogram.add(inc);
+	}
+	
+	public void addVarDeclaration(VarDeclaration var){
+		varDeclarationFluxogram.add(var);
+	}
+	
+	
 	
 	public void addSetupFunction(AbstractScript function){
 		setupFluxogram.add(setupFluxogram.size(), function);
@@ -49,23 +65,42 @@ public class ArduinoCodeBuild {
 		
 		// Montagem do código
 		addCodeHeader(header);
-		// função SETUP
-		code += "void setup(){\n";
-		for (AbstractScript function : setupFluxogram) {
-			code += "\t"+function.script;
-		} 
 		
-		code += "}\n\n";
+		//INCLUDES
+		for(AbstractScript inc : includeFluxogram){
+			inc.mountScript();
+			code.append(inc.script);
+		}
+		
+		code.append("\n");
+		
+		//VARIAVEIS GLOBAIS
+		for(AbstractScript global:varDeclarationFluxogram){
+			global.mountScript();
+			code.append(global.script);
+		}
+		
+		code.append("\n");
+		
+		// função SETUP
+		code.append("void setup(){\n");
+		for (AbstractScript function : setupFluxogram) {
+			function.mountScript();
+			code.append("\t"+function.script);
+		}
+		
+		code.append("}\n\n");
 		
 		// função LOOP
 		
 		
-		code += "void loop(){\n";
+		code.append("void loop(){\n");
 		for (AbstractScript lFunction : loopFluxogram) {
-			code += "\t"+lFunction.script;
+			lFunction.mountScript();
+			code.append("\t"+lFunction.script);
 		}
 		
-		code += "}\n";
+		code.append("}\n");
 		
 		// Fim da montagem do código
 		
@@ -76,7 +111,7 @@ public class ArduinoCodeBuild {
 	}
 	
 	private void addCodeHeader(StringBuffer buffer) {
-		code ="/* \n"+buffer.toString()+" \n*/\n\n";
+		code.append("/* \n"+buffer.toString()+" \n*/\n\n");
 	}
 
 	private boolean saveCode(){
@@ -84,7 +119,7 @@ public class ArduinoCodeBuild {
 		
 		try {
 			BufferedWriter br = new BufferedWriter(new FileWriter(finalFile));
-			br.write(code);
+			br.write(code.toString());
 			br.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
