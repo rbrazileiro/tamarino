@@ -1,0 +1,124 @@
+<project name="compileTamarino" default="default" basedir=".">
+    <description>
+        Script responsável pela geração do pacote do software Tamarino - Widget
+    </description>
+    
+    <property name="dir"        value=".."/>
+    <property name="dir.src"    value="${dir}/src"/>
+    <property name="dir.conf"   value="${dir}/conf"/>
+    <property name="dir.cpp"    value="${dir}/cpp"/>
+    <property name="dir.lib"    value="${dir}/lib"/>
+    
+    <property name="bin"            value="${user.home}/_BUILD/${ant.project.name}"/>
+    <property name="bin.javac"      value="${bin}/javac"/>
+    <property name="bin.bin"        value="${bin}/bin"/>    
+    <property name="bin.bin.javadoc"    value="${bin.bin}/javadoc"/>
+    <property name="bin.bin.sources"    value="${bin.bin}/sources"/>
+    <property name="bin.package"    value="${bin}/tamarino.zip"/>
+    <property name="bin.jar.name"   value="${bin.bin}/tamarino.jar"/>
+    
+    <path id="classpath">
+        <fileset dir="${dir.lib}">
+            <include name="**/*.jar"/>
+        </fileset>        
+    </path>
+    
+    <target name="default">
+        <echo message="* Uso correto deste script: ant [nome_target]"/>
+        <echo message="* "/>
+        <echo message="* Lista de targets disponíveis:"/>
+        <echo message="* (A execucao de uma destas targets executa automaticamente todas as anteriores)"/>
+        <echo message="* clean - Limpa o ambiente de compilacao"/>
+        <echo message="* init - Inicializa o ambiente de geracao"/>
+        <echo message="* compile - Compila o sistema"/>
+        <echo message="* jar - gera o jar do sistema"/>
+        <echo message="* javadoc - gera o javadoc do sistema "/>
+        <echo message="* pack - gera o pacote zip final"/>
+    </target>
+    
+    <target name="clean" description="limpa o ambiente de compilacao">
+        <delete dir="${bin}"/>
+    </target>
+    
+    <target name="init" description="Inicializa o ambiente de compilacao" depends="clean">
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${bin.javac}"/>        
+        <mkdir dir="${bin.bin}"/>        
+    </target>
+    
+    <target name="compile" description="compila os fontes" depends="init">
+        <javac 
+            srcdir="${dir.src}" 
+            destdir="${bin.javac}" 
+            classpathref="classpath" 
+            includeAntRuntime="false"
+            failonerror="true"
+            />
+    </target>
+    
+    <target name="jar" description="Gera o arquivo .jar" depends="compile">
+        <jar destfile="${bin.jar.name}" basedir="${bin.javac}">
+            <manifest>
+                <attribute name="Built-By"      value="${user.name}"/>
+                <attribute name="Main-Class"    value="br.ufpe.cin.tamarino.gui.Main"/>
+                <attribute name="Class-Path"    value="lib/xstream-1.4.2.jar lib/javatuples-1.2.jar"/>
+            </manifest>
+        </jar>
+        <delete dir="${bin.javac}"/>
+        
+        <input 
+            message="Gerar o javadoc?"
+            validargs="y,n"
+            addproperty="generate.javadoc"/>
+    </target>
+    
+    <target name="javadoc" description="Gera o javadoc" depends="jar" if="generate.javadoc">
+        <mkdir dir="${bin.bin.javadoc}"/>
+        <javadoc 
+            packagenames="br.ufpe.cin.tamarino.*"
+            sourcepath="${dir.src}"
+            destdir="${bin.bin.javadoc}"
+            author="true"
+            version="true"
+            use="true"
+            windowtitle="Tamarino API"
+            >
+            <doctitle><![CDATA[<h1>Tamarino</h1>]]></doctitle>
+            <bottom><![CDATA[<i>Copyright &#169; 2012 Dummy Corp. All Rights Reserved.</i>]]></bottom>
+        </javadoc>
+        
+        <zip destfile="${bin.bin}/javadoc.zip" basedir="${bin.bin.javadoc}"/>
+        <delete dir="${bin.bin.javadoc}"/>
+        
+        <mkdir dir="${bin.bin.sources}"/>
+        <copy todir="${bin.bin.sources}">
+            <fileset dir="${dir.src}">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+        
+        <zip destfile="${bin.bin}/sources.zip" basedir="${bin.bin.sources}"/>
+        <delete dir="${bin.bin.sources}"/>
+    </target>
+    
+    <target name="pack">
+        <antcall target="javadoc"/>
+        
+        <mkdir dir="${bin.bin}/conf"/>
+        <copy todir="${bin.bin}/conf">
+            <fileset dir="${dir.conf}">
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+        
+        <mkdir dir="${bin.bin}/lib"/>
+        <copy todir="${bin.bin}/lib">
+            <fileset dir="${dir.lib}">
+                <include name="**/*.jar"/>
+            </fileset>
+        </copy>
+        
+        <zip destfile="${bin.package}" basedir="${bin.bin}"/>
+        <delete dir="${bin.bin}"/>        
+    </target>   
+</project>

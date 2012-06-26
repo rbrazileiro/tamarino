@@ -10,11 +10,16 @@ import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalRead;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.DigitalWrite;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.Include;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.PinMode;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.serial.SerialAvailable;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.serial.SerialBegin;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.serial.SerialRead;
+import br.ufpe.cin.tamarino.arduinoGenerator.functions.serial.SerialPrintln;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.ServoAttach;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.ServoDetach;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.ServoRead;
 import br.ufpe.cin.tamarino.arduinoGenerator.functions.servo.ServoWrite;
 import br.ufpe.cin.tamarino.arduinoGenerator.structs.ForStruct;
+import br.ufpe.cin.tamarino.arduinoGenerator.structs.WhileStruct;
 import br.ufpe.cin.tamarino.circuit.Circuit;
 import br.ufpe.cin.tamarino.xml.ParserTamarino;
 
@@ -51,6 +56,11 @@ public class Arduino extends Circuit{
 		ParserTamarino.getInstance().addAlias("varDeclaration", VarDeclaration.class);
 		ParserTamarino.getInstance().addAlias("forStruct", ForStruct.class);
 		ParserTamarino.getInstance().addAlias("block", Block.class);
+		ParserTamarino.getInstance().addAlias("serialAvailable", SerialAvailable.class);
+		ParserTamarino.getInstance().addAlias("serialBegin", SerialBegin.class);
+		ParserTamarino.getInstance().addAlias("serialRead", SerialRead.class);
+		ParserTamarino.getInstance().addAlias("serialPrintln", SerialPrintln.class);
+		ParserTamarino.getInstance().addAlias("whileStruct", WhileStruct.class);
 		
 	}
 	

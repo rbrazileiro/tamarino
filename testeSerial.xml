@@ -8,25 +8,9 @@
     </description>
     <type>UNO</type>        
     <setup>
-        <pinMode>
-            <pinNumber>13</pinNumber>
-            <function>OUTPUT</function>
-        </pinMode>
+        
     </setup>
     <loop>
-        <digitalWrite>
-            <pin>13</pin>
-            <level>HIGH</level>
-        </digitalWrite>
-        <delay>
-            <time>1000</time>            
-        </delay>
-        <digitalWrite>
-            <pin>13</pin>
-            <level>LOW</level>
-        </digitalWrite>
-        <delay>
-            <time>1000</time>            
-        </delay>
+        
     </loop>            
 </arduino>

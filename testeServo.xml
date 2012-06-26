@@ -46,5 +46,25 @@
                 </scripts>
             </block>
         </forStruct>
+        <forStruct>
+            <param1>
+                <typeVar>int</typeVar>
+                <varName>pos</varName>
+                <value>180</value>
+            </param1>
+            <param2>pos&gt;0</param2>
+            <param3>pos-=1</param3>
+            <block>
+                <scripts>
+                    <servoWrite>
+                        <servoName>myServo</servoName>
+                        <value>pos</value>
+                    </servoWrite>
+                    <delay>
+                        <time>15</time>
+                    </delay>
+                </scripts>
+            </block>
+        </forStruct>
     </loop>            
 </arduino>

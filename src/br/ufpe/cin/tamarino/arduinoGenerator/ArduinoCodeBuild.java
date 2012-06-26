@@ -12,6 +12,8 @@ import br.ufpe.cin.tamarino.conf.Conf;
 import br.ufpe.cin.tamarino.conf.Conf.ConfKeys;
 
 public class ArduinoCodeBuild {
+	
+	private static int count=0;
 
 	private StringBuffer code;
 	private File finalFile;	
@@ -26,8 +28,7 @@ public class ArduinoCodeBuild {
 		setupFluxogram = new ArrayList<AbstractScript>();
 		loopFluxogram = new ArrayList<AbstractScript>();
 		includeFluxogram=new ArrayList<AbstractScript>();
-		varDeclarationFluxogram=new ArrayList<AbstractScript>();
-		finalFile = new File(Conf.getInstance().getProperty(ConfKeys.PATH_TEMP)+"/arduinoCode.ino");
+		varDeclarationFluxogram=new ArrayList<AbstractScript>();		
 	}
 	
 	public void addInclude(Include inc){
@@ -116,12 +117,12 @@ public class ArduinoCodeBuild {
 	}
 	
 	private void addCodeHeader(StringBuffer buffer) {
-		code.append("/** \n"+buffer.toString()+" \n*/\n\n");
+		code.append("/** \n"+buffer.toString()+" \n */\n\n");
 	}
 
 	private boolean saveCode(){
 		boolean result = false;
-		
+		finalFile = new File(Conf.getInstance().getProperty(ConfKeys.PATH_TEMP)+"/arduinoCode"+count+".ino");
 		try {
 			BufferedWriter br = new BufferedWriter(new FileWriter(finalFile));
 			br.write(code.toString());
@@ -130,7 +131,7 @@ public class ArduinoCodeBuild {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		count++;
 		return result;
 	}
 }

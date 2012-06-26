@@ -47,6 +47,10 @@ public class Conf {
 	 */
 	public enum ConfKeys{
 		/**
+		 * Path to the deploy folder
+		 */
+		PATH_DEPLOY,
+		/**
 		 * Path to the temp folder
 		 */
 		PATH_TEMP,
@@ -74,6 +78,8 @@ public class Conf {
 		@Override
 		public String toString(){
 			switch(this){
+			case PATH_DEPLOY:
+				return "path.deploy";
 			case PATH_TEMP:
 				return "path.temp";
 			case PATH_CPP:

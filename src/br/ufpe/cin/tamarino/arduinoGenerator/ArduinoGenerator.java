@@ -25,17 +25,21 @@ public class ArduinoGenerator {
 		ArduinoCodeBuild acb=new ArduinoCodeBuild();
 		
 		LinkedList<Include> includes=ard.getIncludes();
-		for(int i=0;i<includes.size();i++){
-			Include af=includes.get(i);			
-			acb.addInclude(af);						
-		}
+		if(includes!=null){
+			for(int i=0;i<includes.size();i++){
+				Include af=includes.get(i);			
+				acb.addInclude(af);						
+			}
+		}		
 		
 		LinkedList<VarDeclaration> varDeclarations=ard.getGlobals();
-		for(int i=0;i<varDeclarations.size();i++){
-			VarDeclaration af=varDeclarations.get(i);			
-			acb.addVarDeclaration(af);
-									
-		}
+		if(varDeclarations!=null){
+			for(int i=0;i<varDeclarations.size();i++){
+				VarDeclaration af=varDeclarations.get(i);			
+				acb.addVarDeclaration(af);
+										
+			}
+		}		
 		
 		//adicionando as funções do setup
 		LinkedList<AbstractScript> setup=ard.getSetup();
@@ -52,7 +56,7 @@ public class ArduinoGenerator {
 		
 		StringBuffer description=new StringBuffer("");
 		
-		description.append(" * +++ "+ard.getName()+" +++\n* \n");
+		description.append(" * +++ "+ard.getName()+" +++\n * \n");
 		
 		StringTokenizer st=new StringTokenizer(ard.getDescription(), "\n");
 		while(st.hasMoreElements()){
