@@ -1,5 +1,8 @@
 #tAMARINO v.0.1.0
-Toolkit for Rapid Prototyping in Physical Computing Projects
+A visual approach to rapid prototyping in physical computing
+[Video](https://vimeo.com/65594452)
+
+tAMARINO is a visual approach to rapid prototyping in physical computing. It proposes an unique and intuitive visual enviroment toolkit to accelerate physical computing prototypes. The evaluation reveal tAMARINO' success to straightforward quick development - even on first-time prototyping – further lowering the time-to-market. This first version is designed for Arduino microcontrollers, but is obviously extendable to many other boards.
 
 ## Requirements
 * [Breakout.js](https://github.com/soundanalogous/Breakout)
@@ -30,9 +33,9 @@ and run
 
 set the default folder to tAMARINO repository.
 
-* Open a browser and type http://localhost:8887 and enjoy!
+* Open a browser (Chrome, Firefox and Safari), type http://localhost:8887 and enjoy!
 
-more in [Breakoutjs Server Guide](http://breakoutjs.com/guides/using-breakout-server/)
+more about Breakout Server in [Breakoutjs Server Guide](http://breakoutjs.com/guides/using-breakout-server/)
 
 
 ## Visual Prototype
