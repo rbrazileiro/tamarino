@@ -1,0 +1,59 @@
+.ui-anglepicker {
+    width: 70px;
+    height: 70px;
+
+    /*background: -moz-linear-gradient(top, #eeb21b, #eeb21b 20%, #eeb21b);*/
+    /*background: -webkit-linear-gradient(top, #eeb21b, #eeb21b 20%, #eeb21b);*/
+    /*border: 1px solid #FFF6EA;*/
+
+    -moz-box-shadow: inset 0 2px 3px white, inset 0 -1px 2px #fffef8;
+    -webkit-box-shadow: inset 0 2px 3px white, inset 0 -1px 2px #fffef8;
+    box-shadow: inset 0 2px 3px white, inset 0 -1px 2px #fffef8;
+
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+}
+.ui-anglepicker-pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+
+    margin: -2px 0 0 -2px;
+    -moz-transform-origin: 2px 2px;
+    -webkit-transform-origin: 2px 2px;
+    -ms-transform-origin: 2px 2px;
+    -o-transform-origin: 2px 2px;
+    transform-origin: 2px 2px;
+}
+
+.ui-anglepicker:hover, .ui-anglepicker.ui-anglepicker-dragging {
+    border-color: #FFF6EA;
+}
+
+.ui-anglepicker-dragging .ui-anglepicker-dot, .ui-anglepicker-dragging .ui-anglepicker-line,
+.ui-anglepicker:hover .ui-anglepicker-dot, .ui-anglepicker:hover .ui-anglepicker-line {
+    background: rgb(87, 56, 22);
+}
+
+.ui-anglepicker-dot {
+    height: 8px;
+    width: 8px;
+    position: absolute;
+    background: rgb(87, 56, 22);
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.ui-anglepicker-line {
+    margin-top: 1.5px;
+    margin-right: -2px;
+    height: 3px;
+    border-radius: 1em;
+    width: 3em;
+    background: rgb(238, 178, 27);
+}​

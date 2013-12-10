@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>tAMARINO v.0.1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="assets/css/style-bootstrap.css" rel="stylesheet" media="screen">
+    <link href="assets/css/style.css" rel="stylesheet" media="screen">
+    <link href="assets/css/bootstrapSwitch.css" rel="stylesheet">    
+    <link href="assets/css/ui.anglepicker.css" rel="stylesheet" media="screen"/>
+    <link href="assets/css/ui-lightness/jquery-ui.css" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" href="assets/js/joyride/joyride-2.0.3.css">
+    <script src="assets/js/jquery-1.9.1.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>                
+    <script src="assets/js/bootstrap.min.js"></script>    
+    <script src="assets/js/Breakout.js"></script>
+    <script src="assets/js/jquery.jsPlumb-1.3.16-all-min.js"></script>                
+    <script src="assets/js/tamarino-min-0.1.0.js"></script>
+    <script src="assets/js/jcanvas.min.js"></script>        
+    <script src="assets/js/ui.anglepicker-180.js"></script>
+    <script src="assets/js/bootstrapSwitch.js"></script>
+
+    <!-- // <script src="assets/js/joyride/jquery-1.8.3.js"></script> -->
+       
+  </head>
+  
+  <body>    
+
+    <!--
+        /******************************************************************/
+        /* tAMARINO v.0.1.0
+        /* Toolkit for Rapid Prototyping in Physical Computing Projects
+        /* based on:
+        /*   Bootstrap (http://twitter.github.io/bootstrap/index.html)
+        /*   Breakout.js (http://breakoutjs.com)
+        /*   jQuery (http://jquery.com/)        
+        /*   jsPlumb (http://jsplumb.org)
+        /*   jCanvas (http://calebevans.me/projects/jcanvas/)
+        /*   Board and Components Images by Fritzing (http://fritzing.org)
+        /* @author - Ricardo Brazileiro
+        /* @since - 04/2013
+        /* rbrazileiro at gmail dot com
+        /******************************************************************/
+    -->
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+
+    <!-- tAMARINO NAVBAR TOOL -->
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <a class="brand" href="index.html"><div class="tamarino-icon">s<!-- <i class="icon-leaf icon-white"></i> --></div>
+        <div class="tamarino-txt">tAMARINO</div></a>
+        <div id="makeSwitch" class="switch switch-small" data-on="danger" data-off="warning" data-on-label="Sketch" data-off-label="Make">
+            <input type="checkbox" checked="checked">
+        </div>       
+
+        <ul id="menuComponents" class="nav pull-right">
+          <li class="dropdown">
+            <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown">            
+            <!-- <i class="icon-edit"></i> --> Input
+            <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+              <li><a tabindex="-1" href="#" class="moduleBtn">Button</a></li>
+              <li><a tabindex="-1" href="#" class="modulePot">Potentiometer</a></li>
+              <li><a tabindex="-1" href="#" class="moduleLdr">LDR-Photosensor</a></li>              
+              <li class="disabled"><a tabindex="-1" href="#">Temperature</a></li>
+              <li class="disabled"><a tabindex="-1" href="#">FSR-Sensor</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+            <!-- <i class="icon-edit"></i> --> Output
+            <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+              <li><a tabindex="-1" href="#" class="moduleLed">Led</a></li>
+              <li><a tabindex="-1" href="#" class="moduleSrv">Servo</a></li>
+              <li><a tabindex="-1" href="#" class="moduleSpk">Speaker</a></li>              
+              <li class="disabled"><a tabindex="-1" href="#">DC Motor</a></li>
+              <li class="disabled"><a tabindex="-1" href="#">RGB Led</a></li>
+              <li class="disabled"><a tabindex="-1" href="#">Stepper</a></li>
+              <li class="disabled"><a tabindex="-1" href="#">Solenoid</a></li>
+            </ul>
+          </li>
+          <!-- <li class="dropdown board" id="schematic_control"><a href="#" class="btn btn-small btn-warning"><i class="icon-wrench"></i> Board</a></li> -->
+        </ul>
+
+      </div>
+    </div>    
+        
+    <!-- TRASH -->
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12" id="trashRemove">
+          <img id="lixeira" src="assets/img/trash.png">
+         </div>        
+      </div>
+    </div>
+
+    <!-- BREADBOARD SIMULATOR -->
+
+    <div class="container-fluid" id="schema_tab">
+        
+        <div id="schema_content">            
+                <canvas id="boards" width="800" height="600"></canvas>                
+                <canvas id="input-pot" width="800" height="600"></canvas>
+                <canvas id="input-ldr" width="800" height="600"></canvas>
+                <canvas id="input-btn" width="800" height="600"></canvas>
+                <canvas id="output" width="800" height="600"></canvas>
+                <canvas id="output-spk" width="800" height="600"></canvas>
+                <canvas id="output-srv" width="800" height="600"></canvas>
+                <canvas id="schematico" width="800" height="600"></canvas>            
+        </div>
+    </div> 
+
+    <!-- MODULES SESSION -->
+
+    <section id="modules" class="module-container">
+        <!-- POT MODULE -->
+        <div id="potentiometer" class="module pot">
+            <div class="content">
+                <h6 class="module-title">pot</h6>
+                <div class="potMinModule">
+                    <div class="slider-info">
+                        <span class="label">min</span>
+                        <span class="value"><input type="text" class="tamarino-inputs" id="potMinSliderValue"></span>
+                    </div>
+                    <div id="potMinSlider" class="slider-ux ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"></div>
+                </div>
+
+                <div class="potMaxModule">
+                    <div class="slider-info">
+                        <span class="label">max</span>
+                        <span class="value"><input type="text" class="tamarino-inputs" id="potMaxSliderValue"></span>
+                    </div>
+                    <div id="potMaxSlider" class="slider-ux ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"></div>
+                </div>
+
+                <div class="potFilterValueModule" id="potFilterValueModule">  
+                    <input id="potFilterValue" value="0">                        
+                </div>
+
+                <div class="portSelect">                        
+                    <select id="potPortSelect" name="potPortValue" value="">
+                        <option value="" selected> PORT </option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHOTOCELL LDR MODULE -->
+        <div id="photocell" class="module ldr">
+            <div class="content">
+                <h6 class="module-title">ldr</h6>
+                <div class="ldrMinModule">
+                    <div class="slider-info">
+                        <span class="label">min</span>
+                        <span class="value"><input type="text" class="tamarino-inputs" id="ldrMinSliderValue"></span>
+                    </div>
+                    <div id="ldrMinSlider" class="slider-ux ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"></div>
+                </div>
+
+                <div class="ldrMaxModule">
+                    <div class="slider-info">
+                        <span class="label">max</span>
+                        <span class="value"><input type="text" class="tamarino-inputs" id="ldrMaxSliderValue"></span>
+                    </div>
+                    <div id="ldrMaxSlider" class="slider-ux ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"></div>
+                </div>
+
+                <div class="ldrFilterValueModule" id="ldrFilterValueModule">  
+                    <input id="ldrFilterValue" value="0">                        
+                </div>
+
+                <div class="portSelect">                        
+                    <select id="ldrPortSelect" name="ldrPortValue" value="">
+                        <option value="" selected> PORT </option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- LED MODULE -->
+        <div id="led" class="module led">
+            <div class="content">
+                <h6 class="module-title">led</h6>                    
+                <div class="ledFreqModule" id="ledFreqModule">
+                    <div class="slider-info">
+                        <span class="label">frequency</span>
+                        <span class="value"><input type="text" class="tamarino-inputs" id="ledFreqSliderValue"></span>
+                    </div>
+                    <div id="ledFreqSlider" class="slider-ux ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"></div>
+                </div>
+
+                <div class="ledIntModule" id="ledIntModule">
+                    <div class="slider-info">
+                        <span class="label">intensity</span>
+                        <span class="value"><input type="text" class="tamarino-inputs" id="ledIntSliderValue"></span>
+                    </div>
+                    <div id="ledIntSlider" class="slider-ux ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"></div>
+                </div>
+
+                <div class="stateSelect" id="stateSelect">
+                  <div class="slider-info">
+                        <span class="label">TRIGGER</span>                        
+                  </div>
+                  <div id="trigger-led">
+                    <button class="btn btn-info btn-small ledState" id="btnLedOn">I</button>
+                    <button class="btn btn-info btn-small ledState" id="btnLedOff">O</button>
+                  </div>
+
+                </div>
+
+                 <div class="portSelect">                        
+                    <select id="ledPortSelect" name="ledPortValue">
+                        <option value=""> PORT </option>
+                        <option value="8">8</option>
+                        <option value="9">9~</option>
+                        <option value="10">10~</option>
+                        <option value="11">11~</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SPEAKER MODULE -->
+        <div id="speaker" class="module spk">
+            <div class="content">
+                <h6 class="module-title">speaker</h6>
+                <div class="spkFreqModule" id="spkFreqModule">
+                    <div class="slider-info">
+                        <span class="label">freq</span>
+                        <span class="value"><input type="text" class="tamarino-inputs" id="spkFreqSliderValue"></span>
+                    </div>
+                    <div id="spkFreqSlider" class="slider-ux ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"></div>
+                </div>
+
+                <div class="oscSelect">
+                    <select id="spkOscSelect" name="spkOscValue">
+                        <option value="square">SQUARE</option>
+                        <option value="sin">SIN</option>
+                        <option value="saw">SAW</option>
+                        <option value="triangle">TRIANGLE</option>
+                        <option value="impulse">IMPULSE</option>                            
+                    </select>
+                </div>
+
+                <div class="portSelect">                        
+                    <select id="spkPortSelect" name="spkPortValue" value="">
+                        <option value="" selected> PORT </option>
+                        <option value="3">3~</option>
+                        <option value="5">5~</option>
+                        <option value="6">6~</option>
+                        <option value="9">9~</option>
+                        <option value="10">10~</option>
+                        <option value="11">11~</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- BUTTON MODULE -->
+        <div id="button" class="module bttn">
+            <div class="content">
+                <h6 class="module-title">button</h6>
+                <div class="btnStateModule" id="btnStateModule">
+                  <div class="slider-info">
+                        <span class="label">state</span>                      
+                  </div>
+                    <div id="btnStateIcon"></div>
+                    <input id="btnStateValue" value="0">
+                </div>                    
+
+                <div class="portSelect">                        
+                    <select id="btnPortSelect" name="btnPortValue" value="">
+                        <option value=""> PORT </option>
+                        <option value="2">2</option>
+                        <option value="3">3~</option>
+                        <option value="4">4</option>
+                        <option value="5">5~</option>
+                        <option value="6">6~</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+         <!-- SERVO MODULE -->
+        <div id="servo" class="module srv">
+            <div class="content">
+                <h6 class="module-title">servo</h6>
+                <div class="srvAngleValueModule" id="srvAngleValueModule">
+                    <div class="slider-info">
+                        <span class="label">position</span>                      
+                    </div>  
+                    <div id="srvAngleValue"></div>
+                    <div id="srvAngleLog"></div>                        
+                </div>
+
+                <div class="portSelect">                        
+                    <select id="srvPortSelect" name="srvPortValue" value="">
+                        <option value="" selected> PORT </option>
+                        <option value="3">3~</option>
+                        <option value="5">5~</option>
+                        <option value="6">6~</option>
+                        <option value="9">9~</option>
+                        <option value="10">10~</option>
+                        <option value="11">11~</option>
+                    </select>
+                </div>
+            </div>
+        </div>            
+    </section>
+
+    <div id="tour">
+        <div id="menuButton"></div>        
+        <div id="sketchButton"></div>
+        <div id="makeButton"></div>
+    </div>
+
+    <ol id="joyRideTipContent">
+      <li data-id="menuButton" data-button="Next" data-options="tipLocation:left">
+        <h2>Inputs, Outputs</h2>
+        <p>Selecione os componentes de entrada e saída!</p>
+        <img src="assets/img/inout.jpg">
+      </li>      
+      <li data-id="sketchButton" data-button="Next">
+        <h2>Sketch Area</h2>
+        <p>Configure os componentes como desejar. Faça conexões entre métodos levando a saída de um módulo até a entrada de outro módulo.</p>
+        <img src="assets/img/sketch.jpg">
+      </li>
+      <li data-id="makeSwitch" data-button="Next">
+        <h2>Monte o esquemático</h2>
+        <p>Tenha em mãos o passo a passo para montar os componentes</p>
+        <img src="assets/img/schematic.jpg">
+      </li>      
+      <li data-id="lixeira" data-button="Close" data-options="tipLocation:left">
+        <h2>Remova componentes!</h2>
+        <p>Para apagar um módulo, arraste-o até a lixeira.</p>
+      </li>
+
+    </ol>
+
+    
+    <!-- Run the plugin -->
+    <script src="assets/js/joyride/jquery.cookie.js"></script>
+    <script src="assets/js/joyride/modernizr.mq.js"></script>
+    <script src="assets/js/joyride/jquery.joyride-2.0.3.js"></script> 
+
+    <!-- Preloader -->
+            <script type="text/javascript">
+                //<![CDATA[
+                $(window).load(function() { // makes sure the whole site is loaded
+                    $("#status").fadeOut(); // will first fade out the loading animation
+                    $("#preloader").delay(350).fadeOut("slow"); // will fade out the white DIV that covers the website.
+                    $('#joyRideTipContent').joyride({
+                      autoStart : true,
+                      postStepCallback : function (index, tip) {
+                      if (index == 3) {
+                        $(this).joyride('set_li', false, 1);
+                      }
+                    },
+                    modal:true,
+                    expose: false
+                    });
+                });
+                //]]>
+            </script>            
+    
+    <!-- <ul id="log"></ul> -->
+    <!-- SCRIPTS AND LIBRARIES -->
+
+    
+
+    <!-- END SCRIPT -->
+
+  </body>
+</html>
