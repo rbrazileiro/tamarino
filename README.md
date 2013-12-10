@@ -1,6 +1,7 @@
 #tAMARINO v.0.1.0
 A visual approach to rapid prototyping in physical computing
-[Video](https://vimeo.com/65594452)
+
+* [Video](https://vimeo.com/65594452)
 
 tAMARINO is a visual approach to rapid prototyping in physical computing. It proposes an unique and intuitive visual enviroment toolkit to accelerate physical computing prototypes. The evaluation reveal tAMARINO' success to straightforward quick development - even on first-time prototyping – further lowering the time-to-market. This first version is designed for Arduino microcontrollers, but is obviously extendable to many other boards.
 
