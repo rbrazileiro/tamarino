@@ -19,10 +19,14 @@ Toolkit for Rapid Prototyping in Physical Computing Projects
 Make the steps below to build tAMARINO:
 
 * Start a Breakout.js Server. For linux, you need install:
-	>> sudo apt-get install librxtx-java
+	```
+	sudo apt-get install librxtx-java
+	```
 
 and run
-	>> java -jar BreakoutServer.jar
+	```
+	java -jar BreakoutServer.jar
+	```
 
 set the default folder to tAMARINO repository.
 
