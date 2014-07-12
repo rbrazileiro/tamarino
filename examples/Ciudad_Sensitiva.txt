@@ -1,0 +1,32 @@
+Ciudad SENSEble
+http://gnd
+
+1 - encontros na mutidão (
+    http,
+    node.js,
+    socket.io,
+    jquery,
+    game: cada usuário que entrar no sitio adicionar uma nova div (esferas), se sair, remove. tela branca, preencher com div #000 para economizar energia.
+    node.js, express.js, socket.io, osc, arduino, pd.
+    )
+2 - caminhar salva (
+    acelerometro,
+    jquery.animate,
+    Breakout.js
+    game: a cada novo usuário, aciona um sino com servo motor
+    )
+
+
+
+
+Tempo e ancestralidade
+Computação Ubiqua
+Net.art
+Design Oportunista
+Makers
+FLOSS
+Network Cultures
+Filosofia da Caixa Preta
+Metareciclagem
+Cidade do Controle
+Cidade Transparente

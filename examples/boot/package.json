@@ -1,0 +1,8 @@
+{
+  "name": "entra-sai",
+  "version": "0.0.1",
+  "description": "entra e sai",
+  "dependencies": {
+    "express": "^4.6.0"
+  }
+}

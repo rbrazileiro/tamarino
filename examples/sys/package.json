@@ -1,0 +1,10 @@
+{
+  "name": "sys-entra-sai",
+  "version": "0.0.1",
+  "description": "controle-entra-sai",
+  "dependencies": {
+    "express": "^4.5.1",
+    "johnny-five": "^0.7.55",
+    "socket.io": "^1.0.6"
+  }
+}
